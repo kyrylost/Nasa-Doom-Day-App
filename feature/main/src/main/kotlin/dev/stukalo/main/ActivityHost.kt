@@ -6,8 +6,7 @@ import dev.stukalo.main.databinding.ActivityHostBinding
 import dev.stukalo.navigation.NavigationDirection
 import dev.stukalo.platform.BaseActivity
 
-class ActivityHost: BaseActivity(R.layout.activity_host) {
-
+class ActivityHost : BaseActivity(R.layout.activity_host) {
     private val viewBinding: ActivityHostBinding by viewBinding(ActivityHostBinding::bind)
 
     override fun configureUi() {
@@ -15,9 +14,10 @@ class ActivityHost: BaseActivity(R.layout.activity_host) {
             ?.let { navHostFragment ->
                 navHostFragment.navController.let { navController ->
                     navigator.navController = navController
-                    }
                 }
+            }
     }
+
     override fun navigateTo(
         flow: NavigationDirection?,
         clearBackStackEntry: Boolean,
@@ -25,5 +25,4 @@ class ActivityHost: BaseActivity(R.layout.activity_host) {
     ) {
         navigator.navigateTo(flow, clearBackStackEntry, deeplink)
     }
-
 }

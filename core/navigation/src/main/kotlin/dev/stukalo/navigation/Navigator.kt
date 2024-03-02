@@ -4,7 +4,6 @@ import android.net.Uri
 import androidx.navigation.NavController
 
 class Navigator {
-
     lateinit var navController: NavController
 
     fun navigateTo(
@@ -32,5 +31,4 @@ class Navigator {
     private fun navigateToMain() {
         navController.navigate(NavGraphDirections.actionGlobalMain())
     }
-
 }

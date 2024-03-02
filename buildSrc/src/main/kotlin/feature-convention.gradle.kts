@@ -36,4 +36,5 @@ dependencies {
     implementation(libs.viewbindingpropertydelegate.noreflection)
     implementation(project(":core:platform"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:ui"))
 }

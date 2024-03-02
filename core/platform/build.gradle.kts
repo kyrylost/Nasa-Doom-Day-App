@@ -1,5 +1,4 @@
 plugins {
-//    id("feature-convention")
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
@@ -26,12 +25,10 @@ android {
 }
 
 dependencies {
-
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation(project(":core:ui"))
     implementation(project(":core:navigation"))
-//    testImplementation(libs.junit)
-//    androidTestImplementation(libs.androidx.test.ext.junit)
-//    androidTestImplementation(libs.espresso.core)
 }

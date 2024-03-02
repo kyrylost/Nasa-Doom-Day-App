@@ -5,7 +5,7 @@ import dev.stukalo.init.databinding.FragmentInitBinding
 import dev.stukalo.navigation.NavigationDirection
 import dev.stukalo.platform.BaseFragment
 
-class FragmentInit: BaseFragment(R.layout.fragment_init) {
+class FragmentInit : BaseFragment(R.layout.fragment_init) {
     private val viewBinding: FragmentInitBinding by viewBinding(FragmentInitBinding::bind)
 
     override fun configureUi() {

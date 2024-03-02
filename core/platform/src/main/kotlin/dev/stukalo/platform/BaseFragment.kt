@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import dev.stukalo.navigation.NavigationDirection
 import dev.stukalo.navigation.Navigable
+import dev.stukalo.navigation.NavigationDirection
 
 abstract class BaseFragment(
     @LayoutRes val layout: Int,
