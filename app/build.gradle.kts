@@ -1,6 +1,9 @@
 plugins {
     id(libs.plugins.com.android.application.get().pluginId)
     id(libs.plugins.org.jetbrains.kotlin.android.get().pluginId)
+    id(libs.plugins.hilt.android.plugin.get().pluginId)
+    id(libs.plugins.google.hilt.android.plugin.get().pluginId)
+    id(libs.plugins.ksp.get().pluginId)
 }
 
 android {
@@ -39,8 +42,11 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
 
+    implementation(libs.hilt.android)
+    ksp(libs.android.hilt.compiler)
+    ksp(libs.hilt.compiler)
+
     implementation(project(":feature:main"))
-    implementation(project(":feature:splash"))
     implementation(project(":feature:init"))
     implementation(project(":feature:onboard"))
     implementation(project(":feature:asteroids"))
@@ -52,4 +58,10 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:platform"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:common"))
+
+    implementation(project(":data:network"))
+    implementation(project(":data:network:impl"))
+    implementation(project(":data:repository"))
+    implementation(project(":data:repository:impl"))
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="try_again_later">Try again later</string>
+    <string name="potentially_hazardous">Potentially Hazardous</string>
+    <string name="orbiting_body">Orbiting body</string>
+    <string name="estimated_diameter">Estimated diameter</string>
+    <string name="min">MIN</string>
+    <string name="max">MAX</string>
+    <string name="estimated_diameter_value">%.4f</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+</resources>

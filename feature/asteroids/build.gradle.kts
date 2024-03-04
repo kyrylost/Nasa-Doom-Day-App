@@ -1,5 +1,8 @@
 plugins {
     id("feature-convention")
+    id(libs.plugins.hilt.android.plugin.get().pluginId)
+    id(libs.plugins.google.hilt.android.plugin.get().pluginId)
+    id(libs.plugins.ksp.get().pluginId)
 }
 
 android {
@@ -24,6 +27,10 @@ dependencies {
 //    implementation(libs.core.ktx)
 //    implementation(libs.appcompat)
 //    implementation(libs.material)
+    implementation(libs.hilt.android)
+    ksp(libs.android.hilt.compiler)
+    ksp(libs.hilt.compiler)
+    implementation(libs.paging.runtime)
 
-    implementation(project(":data:network"))
+    implementation(project(":data:repository"))
 }

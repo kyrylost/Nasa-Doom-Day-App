@@ -35,6 +35,7 @@ dependencies {
     implementation(libs.bundles.navigation)
     implementation(libs.viewbindingpropertydelegate.noreflection)
     implementation(project(":core:platform"))
+    implementation(project(":core:common"))
     implementation(project(":core:navigation"))
     implementation(project(":core:ui"))
 }

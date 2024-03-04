@@ -4,11 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Main" />
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_main_nav_host"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -24,11 +19,15 @@
         android:id="@+id/bnv_nav_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:minHeight="72dp"
-        app:elevation="0dp"
         app:itemActiveIndicatorStyle="@null"
+        app:itemIconTint="@drawable/selector_bottom_nav_color"
         app:itemPaddingBottom="16dp"
         app:itemPaddingTop="12dp"
+        app:itemTextAppearanceActive="@style/TextMedium.Size12"
+        app:itemTextAppearanceInactive="@style/TextRegular.Size12"
+        app:itemTextColor="@drawable/selector_bottom_nav_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

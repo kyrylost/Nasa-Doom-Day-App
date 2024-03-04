@@ -1,11 +1,14 @@
 package dev.stukalo.main
 
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import dev.stukalo.main.databinding.ActivityHostBinding
 import dev.stukalo.navigation.NavigationDirection
 import dev.stukalo.platform.BaseActivity
 
+@AndroidEntryPoint
 class ActivityHost : BaseActivity(R.layout.activity_host) {
     private val viewBinding: ActivityHostBinding by viewBinding(ActivityHostBinding::bind)
 
@@ -24,5 +27,9 @@ class ActivityHost : BaseActivity(R.layout.activity_host) {
         deeplink: String?,
     ) {
         navigator.navigateTo(flow, clearBackStackEntry, deeplink)
+    }
+
+    override fun showLoader(isVisible: Boolean) {
+        viewBinding.pbLoader.isVisible = isVisible
     }
 }

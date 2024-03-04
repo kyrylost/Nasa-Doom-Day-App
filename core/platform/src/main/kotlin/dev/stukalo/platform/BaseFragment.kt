@@ -45,4 +45,10 @@ abstract class BaseFragment(
             ex.printStackTrace()
         }
     }
+
+    private fun requireBaseActivity(): BaseActivity = requireActivity() as BaseActivity
+
+    fun showLoader(isVisible: Boolean) {
+        requireBaseActivity().showLoader(isVisible)
+    }
 }

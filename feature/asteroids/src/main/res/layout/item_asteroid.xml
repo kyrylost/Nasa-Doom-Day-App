@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/TextBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="162361 (2000 AF6)" />
+
+            <TextView
+                android:id="@+id/tv_hazardous"
+                style="@style/TextBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/potentially_hazardous"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+            <TextView
+                android:id="@+id/tv_hazardous_value"
+                style="@style/TextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_hazardous"
+                tools:text="Yes" />
+
+            <TextView
+                android:id="@+id/tv_orbiting_body"
+                style="@style/TextBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/orbiting_body"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_hazardous_value" />
+
+            <TextView
+                android:id="@+id/tv_orbiting_body_value"
+                style="@style/TextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_orbiting_body"
+                tools:text="Earth" />
+
+            <TextView
+                android:id="@+id/tv_estimated_diameter"
+                style="@style/TextBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/estimated_diameter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_orbiting_body_value" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_estimated_diameter">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_estimated_diameter_min"
+                        style="@style/TextMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/min"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_hazardous" />
+
+                    <TextView
+                        android:id="@+id/tv_estimated_diameter_min_value"
+                        style="@style/TextRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_orbiting_body"
+                        app:layout_constraintStart_toEndOf="@+id/tv_orbiting_body"
+                        app:layout_constraintTop_toTopOf="@+id/tv_orbiting_body"
+                        tools:text="0.23" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_estimated_diameter_max"
+                        style="@style/TextMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/max"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_hazardous" />
+
+                    <TextView
+                        android:id="@+id/tv_estimated_diameter_max_value"
+                        style="@style/TextRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_orbiting_body"
+                        app:layout_constraintStart_toEndOf="@+id/tv_orbiting_body"
+                        app:layout_constraintTop_toTopOf="@+id/tv_orbiting_body"
+                        tools:text="0.53" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>

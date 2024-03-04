@@ -38,4 +38,7 @@ abstract class BaseActivity(
             ex.printStackTrace()
         }
     }
+
+    abstract fun showLoader(isVisible: Boolean)
+
 }

@@ -22,4 +22,24 @@
         <item name="android:fontFamily">@font/inter_700</item>
     </style>
 
+    <style name="TextRegular.Size12">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextMedium.Size12">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextMedium.Size14">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextMedium.Size14.Red">
+        <item name="android:textColor">@color/red_900</item>
+    </style>
+
+    <style name="TextMedium.Size14.Primary">
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
 </resources>

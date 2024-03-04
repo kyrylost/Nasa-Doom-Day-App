@@ -8,5 +8,5 @@
     <color name="dark_blue_700">#0D1E44</color>
     <color name="green_900">#339D66</color>
     <color name="red_900">#F84C16</color>
-    <color name="bg_light">#F9F9FA</color>
+    <color name="gray_50">#FCFCFC</color>
 </resources>

@@ -1,6 +1,7 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    id(libs.plugins.com.android.library.get().pluginId)
+    id(libs.plugins.org.jetbrains.kotlin.android.get().pluginId)
+    id(libs.plugins.ksp.get().pluginId)
 }
 
 android {
@@ -9,10 +10,6 @@ android {
 
     defaultConfig {
         minSdk = ConfigData.MIN_SDK
-    }
-
-    buildFeatures {
-        viewBinding = true
     }
 
     compileOptions {
@@ -25,11 +22,11 @@ android {
 }
 
 dependencies {
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.moshi)
+    implementation(libs.logging.interceptor)
+    implementation(libs.moshi.kotlin)
+    ksp(libs.moshi.kotlin.codegen)
 
-//    implementation(libs.core.ktx)
-//    implementation(libs.appcompat)
-//    implementation(libs.material)
-//    testImplementation(libs.junit)
-//    androidTestImplementation(libs.androidx.test.ext.junit)
-//    androidTestImplementation(libs.espresso.core)
+    implementation(project(":core:common"))
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_404">404 Not Found</string>
+    <string name="error_408">408 Request Timeout</string>
+    <string name="error_429">429 Too Many Requests</string>
+    <string name="error_503">503 Service Temporarily Unavailable</string>
+    <string name="unknown_client_error">Unknown client error</string>
+    <string name="unknown_server_error">Unknown server error</string>
+    <string name="unknown_error">Unknown error</string>
+</resources>

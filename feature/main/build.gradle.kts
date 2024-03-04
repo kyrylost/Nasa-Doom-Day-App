@@ -1,6 +1,9 @@
 plugins {
     id("feature-convention")
-    id("androidx.navigation.safeargs")
+    id(libs.plugins.androidx.navigation.safeargs.get().pluginId)
+    id(libs.plugins.hilt.android.plugin.get().pluginId)
+    id(libs.plugins.google.hilt.android.plugin.get().pluginId)
+    id(libs.plugins.ksp.get().pluginId)
 }
 
 android {
@@ -22,6 +25,9 @@ android {
 
 dependencies {
 
+    implementation(libs.hilt.android)
+    ksp(libs.android.hilt.compiler)
+    ksp(libs.hilt.compiler)
 //    implementation(libs.core.ktx)
 //    implementation(libs.appcompat)
 //    implementation(libs.material)

@@ -7,9 +7,11 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 import dev.stukalo.main.databinding.FragmentMainBinding
 import dev.stukalo.platform.BaseFragment
 
+@AndroidEntryPoint
 class FragmentMain : BaseFragment(R.layout.fragment_main) {
     private val viewBinding: FragmentMainBinding by viewBinding(FragmentMainBinding::bind)
 
