@@ -41,8 +41,6 @@ class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
     private val formatter = SimpleDateFormat(DATE_FORMATTER, Locale.getDefault())
 
     private val datePickerBuilder = MaterialDatePicker.Builder.dateRangePicker()
-        .setTheme(dev.stukalo.ui.R.style.ThemeMaterialCalendar)
-        .setTitleText(getString(R.string.select_range))
 
     private val constraintsBuilderRange = CalendarConstraints.Builder()
     private val dateValidator = RangeDateValidator(6)
@@ -164,7 +162,10 @@ class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
     private fun setupDatePicker() {
         constraintsBuilderRange.setValidator(dateValidator)
         datePickerBuilder.setCalendarConstraints(constraintsBuilderRange.build())
-        datePicker = datePickerBuilder.build()
+        datePicker = datePickerBuilder
+            .setTheme(dev.stukalo.ui.R.style.ThemeMaterialCalendar)
+            .setTitleText(getString(R.string.select_range))
+            .build()
         dateValidator.setDatePicker(datePicker)
 
         datePicker.addOnPositiveButtonClickListener { selection ->
