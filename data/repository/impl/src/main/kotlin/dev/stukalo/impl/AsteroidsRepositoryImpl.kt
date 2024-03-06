@@ -9,10 +9,10 @@ import javax.inject.Inject
 class AsteroidsRepositoryImpl @Inject constructor(
     private val asteroidsNetSource: AsteroidsNetSource,
 ) : AsteroidsRepository {
-    override fun getAsteroids(startDate: String, endDate: String, sortOrder: Int) = Pager(
+    override fun getAsteroids(startDate: String, endDate: String, sortByDesc: Boolean) = Pager(
         config = PagingConfig(pageSize = 1),
         pagingSourceFactory = {
-            AsteroidsPagingSource(asteroidsNetSource, startDate, endDate, sortOrder)
+            AsteroidsPagingSource(asteroidsNetSource, startDate, endDate, sortByDesc)
         }
     ).flow
 }

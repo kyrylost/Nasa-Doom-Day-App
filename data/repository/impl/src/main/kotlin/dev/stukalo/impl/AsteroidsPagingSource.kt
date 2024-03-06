@@ -3,6 +3,7 @@ package dev.stukalo.impl
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import dev.stukalo.common.Constants.DATE_FORMATTER
 import dev.stukalo.common.exception.ApiException
 import dev.stukalo.network.source.AsteroidsNetSource
 import dev.stukalo.repository.mapper.mapToAsteroidRepo
@@ -14,12 +15,12 @@ class AsteroidsPagingSource(
     private val asteroidsNetSource: AsteroidsNetSource,
     startDate: String,
     endDate: String,
-    sortOrder: Int,
+    sortByDesc: Boolean,
 ) : PagingSource<Int, Pair<String, List<AsteroidRepo>>>() {
     private var dates: MutableSet<String> = mutableSetOf()
 
     init {
-        val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val dateFormat = DateTimeFormatter.ofPattern(DATE_FORMATTER)
         var fromDate = LocalDate.parse(startDate, dateFormat)
         val toDate = LocalDate.parse(endDate, dateFormat)
 
@@ -28,7 +29,7 @@ class AsteroidsPagingSource(
             fromDate = fromDate.plusDays(1)
         }
         dates.add(toDate.toString())
-        if (sortOrder == 1) {
+        if (sortByDesc) {
             dates = dates.reversed().toMutableSet()
         }
     }

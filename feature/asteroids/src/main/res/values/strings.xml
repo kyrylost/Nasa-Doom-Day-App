@@ -9,4 +9,7 @@
     <string name="estimated_diameter_value">%.4f</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="descending_order">Descending order</string>
+    <string name="apply">Apply</string>
+    <string name="select_range">Select a date range</string>
 </resources>

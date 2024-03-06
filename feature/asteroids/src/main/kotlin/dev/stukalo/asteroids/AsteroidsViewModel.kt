@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.stukalo.repository.model.AsteroidRepo
 import dev.stukalo.repository.repo.AsteroidsRepository
@@ -21,24 +22,36 @@ class AsteroidsViewModel @Inject constructor(
     private val asteroidsRepository: AsteroidsRepository
 ): ViewModel() {
 
-    var sortOrder = 0
-
     private val _asteroidsStateFlow = MutableStateFlow(AsteroidsUiState())
     val asteroidsStateFlow = _asteroidsStateFlow.asStateFlow()
+
+    var showOnlyHazardous = false
 
     data class AsteroidsUiState(
         val asteroids: PagingData<Pair<String, List<AsteroidRepo>>> = PagingData.empty(),
         val sortParamStringRes: Int? = null,
     )
 
-    fun getAsteroids(startDate: String, endDate: String) = viewModelScope.launch {
+    fun getAsteroids(startDate: String, endDate: String, sortByDesc: Boolean = false) = viewModelScope.launch {
         asteroidsRepository.getAsteroids(
-            startDate, endDate, sortOrder
+            startDate, endDate, sortByDesc
         ).cachedIn(viewModelScope).flowOn(Dispatchers.IO).collectLatest { pagingData ->
-            _asteroidsStateFlow.update {
-                it.copy(
-                    asteroids = pagingData
-                )
+            if (showOnlyHazardous) {
+                _asteroidsStateFlow.update {
+                    it.copy(
+                        asteroids = pagingData.map { pair ->
+                            pair.first to pair.second.filter { asteroid ->
+                                asteroid.isPotentiallyHazardousAsteroid ?: false
+                            }
+                        }
+                    )
+                }
+            } else {
+                _asteroidsStateFlow.update {
+                    it.copy(
+                        asteroids = pagingData
+                    )
+                }
             }
         }
     }

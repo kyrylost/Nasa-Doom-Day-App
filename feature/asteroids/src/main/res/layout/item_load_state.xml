@@ -38,7 +38,8 @@
         android:gravity="center"
         android:visibility="gone">
         <ProgressBar
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:indeterminateDrawable="@drawable/style_pb" />
     </LinearLayout>
 </LinearLayout>

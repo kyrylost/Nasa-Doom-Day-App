@@ -26,5 +26,6 @@ android {
 
 dependencies {
     implementation(libs.appcompat)
+    implementation(libs.material)
     implementation("androidx.core:core-splashscreen:1.0.0")
 }
