@@ -6,11 +6,20 @@
 
     <include app:graph="@navigation/init_nav_graph" />
     <include app:graph="@navigation/main_nav_graph" />
+    <include app:graph="@navigation/asteroid_details_nav_graph" />
 
     <action
         android:id="@+id/action_global_main"
         app:destination="@id/main_nav_graph"
         app:popUpTo="@+id/nav_graph"
         app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/action_global_asteroid_details"
+        app:destination="@id/asteroid_details_nav_graph">
+        <argument
+            android:name="arg_one"
+            app:argType="string" />
+    </action>
 
 </navigation>

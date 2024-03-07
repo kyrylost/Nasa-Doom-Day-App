@@ -32,5 +32,8 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.paging.runtime)
 
+    implementation(libs.moshi.kotlin)
+    implementation(libs.moshi.kotlin.codegen)
+
     implementation(project(":data:repository"))
 }

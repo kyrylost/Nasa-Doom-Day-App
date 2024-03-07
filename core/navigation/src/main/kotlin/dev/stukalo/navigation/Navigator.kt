@@ -1,6 +1,7 @@
 package dev.stukalo.navigation
 
 import android.net.Uri
+import android.util.Log
 import androidx.navigation.NavController
 
 class Navigator {
@@ -10,6 +11,7 @@ class Navigator {
         navigationDirection: NavigationDirection?,
         clearBackStackEntry: Boolean = false,
         deeplink: String? = null,
+        arg: String = "",
     ) {
         with(navController) {
             if (clearBackStackEntry) {
@@ -18,6 +20,7 @@ class Navigator {
             if (deeplink.isNullOrEmpty()) {
                 when (navigationDirection) {
                     is NavigationDirection.Main -> navigateToMain()
+                    is NavigationDirection.AsteroidDetails -> navigateToAsteroidDetails(arg)
                     else -> {
                         // stub
                     }
@@ -30,5 +33,10 @@ class Navigator {
 
     private fun navigateToMain() {
         navController.navigate(NavGraphDirections.actionGlobalMain())
+    }
+
+    private fun navigateToAsteroidDetails(arg: String) {
+        Log.d("TDXCGHBJMKL", arg)
+        navController.navigate(NavGraphDirections.actionGlobalAsteroidDetails(arg))
     }
 }

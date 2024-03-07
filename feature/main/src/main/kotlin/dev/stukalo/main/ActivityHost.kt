@@ -25,8 +25,9 @@ class ActivityHost : BaseActivity(R.layout.activity_host) {
         flow: NavigationDirection?,
         clearBackStackEntry: Boolean,
         deeplink: String?,
+        arg: String,
     ) {
-        navigator.navigateTo(flow, clearBackStackEntry, deeplink)
+        navigator.navigateTo(flow, clearBackStackEntry, deeplink, arg)
     }
 
     override fun showLoader(isVisible: Boolean) {

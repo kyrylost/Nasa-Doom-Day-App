@@ -2,13 +2,13 @@ package dev.stukalo.asteroids.util
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.core.util.Pair
 import com.google.android.material.datepicker.CalendarConstraints.DateValidator
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.util.concurrent.TimeUnit
-import androidx.core.util.Pair
 
 class RangeDateValidator(
-    private val allowedRange: Int
+    private val allowedRange: Int,
 ) : DateValidator {
     private var datePicker: MaterialDatePicker<Pair<Long?, Long?>>? = null
 
@@ -32,7 +32,10 @@ class RangeDateValidator(
         return true
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+    override fun writeToParcel(
+        parcel: Parcel,
+        flags: Int,
+    ) {
         parcel.writeInt(allowedRange)
     }
 

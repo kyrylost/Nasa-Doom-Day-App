@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import dev.stukalo.asteroids.databinding.ItemAsteroidsWeekBinding
-import dev.stukalo.repository.model.AsteroidRepo
+import dev.stukalo.common.model.AsteroidUi
 
-class AsteroidsWeekAdapter: PagingDataAdapter<Pair<String, List<AsteroidRepo>>, AsteroidsWeekViewHolder>(
-    DIFF_CALLBACK
+class AsteroidsWeekAdapter : PagingDataAdapter<Pair<String, List<AsteroidUi>>, AsteroidsWeekViewHolder>(
+    DIFF_CALLBACK,
 ) {
+    var onItemClick: ((AsteroidUi) -> Unit)? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -20,7 +21,7 @@ class AsteroidsWeekAdapter: PagingDataAdapter<Pair<String, List<AsteroidRepo>>, 
                 LayoutInflater.from(parent.context),
                 parent,
                 false,
-            )
+            ),
         )
     }
 
@@ -32,22 +33,25 @@ class AsteroidsWeekAdapter: PagingDataAdapter<Pair<String, List<AsteroidRepo>>, 
             getItem(position)?.let { dateToAsteroidList ->
                 bind(dateToAsteroidList)
             }
+            onItemClick = {
+                this@AsteroidsWeekAdapter.onItemClick?.invoke(it)
+            }
         }
     }
 
     companion object {
         private val DIFF_CALLBACK =
-            object : DiffUtil.ItemCallback<Pair<String, List<AsteroidRepo>>>() {
+            object : DiffUtil.ItemCallback<Pair<String, List<AsteroidUi>>>() {
                 override fun areItemsTheSame(
-                    oldItem: Pair<String, List<AsteroidRepo>>,
-                    newItem: Pair<String, List<AsteroidRepo>>,
+                    oldItem: Pair<String, List<AsteroidUi>>,
+                    newItem: Pair<String, List<AsteroidUi>>,
                 ): Boolean {
                     return oldItem.first == newItem.first
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: Pair<String, List<AsteroidRepo>>,
-                    newItem: Pair<String, List<AsteroidRepo>>,
+                    oldItem: Pair<String, List<AsteroidUi>>,
+                    newItem: Pair<String, List<AsteroidUi>>,
                 ): Boolean {
                     return oldItem == newItem
                 }

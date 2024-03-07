@@ -5,5 +5,6 @@ interface Navigable {
         flow: NavigationDirection? = null,
         clearBackStackEntry: Boolean = false,
         deeplink: String? = null,
+        arg: String = "",
     )
 }

@@ -19,9 +19,11 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import dev.stukalo.asteroids.databinding.FragmentAsteroidsBinding
 import dev.stukalo.asteroids.loadstate.LoadStateAdapter
 import dev.stukalo.asteroids.recyclerweeks.AsteroidsWeekAdapter
+import dev.stukalo.asteroids.util.AsteroidAdapter
 import dev.stukalo.asteroids.util.RangeDateValidator
 import dev.stukalo.common.Constants.DATE_FORMATTER
 import dev.stukalo.common.exception.ApiException
+import dev.stukalo.navigation.NavigationDirection
 import dev.stukalo.platform.BaseFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -34,7 +36,6 @@ import java.util.Locale
 const val DATE_PICKER_TAG = "DATE_PICKER"
 
 class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
-
     private val viewBinding: FragmentAsteroidsBinding by viewBinding(FragmentAsteroidsBinding::bind)
     private val viewModel: AsteroidsViewModel by activityViewModels()
 
@@ -64,39 +65,47 @@ class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
         setupDatePicker()
 
         with(viewBinding) {
-            val transitionShowFilters: Transition = Fade().apply {
-                duration = 200
-                addTarget(llShowFilters)
-            }
+            val transitionShowFilters: Transition =
+                Fade().apply {
+                    duration = 200
+                    addTarget(llShowFilters)
+                }
 
-            val transitionFilters: Transition = Slide(Gravity.TOP).apply {
-                duration = 400
-                addTarget(llFilters)
-                addListener(
-                    object: Transition.TransitionListener {
-                        override fun onTransitionStart(transition: Transition) {
-                            llShowFilters.isVisible = false
-                        }
+            val transitionFilters: Transition =
+                Slide(Gravity.TOP).apply {
+                    duration = 400
+                    addTarget(llFilters)
+                    addListener(
+                        object : Transition.TransitionListener {
+                            override fun onTransitionStart(transition: Transition) {
+                                llShowFilters.isVisible = false
+                            }
 
-                        override fun onTransitionEnd(transition: Transition) {
-                            TransitionManager.beginDelayedTransition(clAsteroids, transitionShowFilters)
-                            llShowFilters.isVisible = true
-                        }
+                            override fun onTransitionEnd(transition: Transition) {
+                                TransitionManager.beginDelayedTransition(clAsteroids, transitionShowFilters)
+                                llShowFilters.isVisible = true
+                            }
 
-                        override fun onTransitionCancel(transition: Transition) {}
-                        override fun onTransitionPause(transition: Transition) {}
-                        override fun onTransitionResume(transition: Transition) {}
-                    }
-                )
-            }
+                            override fun onTransitionCancel(transition: Transition) {}
+
+                            override fun onTransitionPause(transition: Transition) {}
+
+                            override fun onTransitionResume(transition: Transition) {}
+                        },
+                    )
+                }
 
             tvFrom.text = from
             tvTo.text = to
 
             rvAsteroids.apply {
-                adapter = asteroidsAdapter.withLoadStateFooter(
-                    footer = LoadStateAdapter(asteroidsAdapter::retry),
-                )
+                adapter =
+                    asteroidsAdapter.withLoadStateFooter(
+                        footer = LoadStateAdapter(asteroidsAdapter::retry),
+                    )
+                asteroidsAdapter.onItemClick = {
+                    navigateTo(NavigationDirection.AsteroidDetails, arg = AsteroidAdapter.toJson(it))
+                }
             }
 
             llShowFilters.setOnClickListener {
@@ -162,10 +171,11 @@ class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
     private fun setupDatePicker() {
         constraintsBuilderRange.setValidator(dateValidator)
         datePickerBuilder.setCalendarConstraints(constraintsBuilderRange.build())
-        datePicker = datePickerBuilder
-            .setTheme(dev.stukalo.ui.R.style.ThemeMaterialCalendar)
-            .setTitleText(getString(R.string.select_range))
-            .build()
+        datePicker =
+            datePickerBuilder
+                .setTheme(dev.stukalo.ui.R.style.ThemeMaterialCalendar)
+                .setTitleText(getString(R.string.select_range))
+                .build()
         dateValidator.setDatePicker(datePicker)
 
         datePicker.addOnPositiveButtonClickListener { selection ->
@@ -173,7 +183,7 @@ class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
             val endDate = selection.second
 
             val startDateString = startDate?.let { formatter.format(Date(it)) }
-            val endDateString = endDate?.let{ formatter.format(Date(it)) }
+            val endDateString = endDate?.let { formatter.format(Date(it)) }
 
             with(viewBinding) {
                 tvFrom.text = startDateString
@@ -182,7 +192,6 @@ class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
 
             datePicker.dismiss()
         }
-
 
         datePicker.addOnDismissListener {
             viewBinding.ibCalendar.background = null

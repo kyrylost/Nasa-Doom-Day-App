@@ -4,12 +4,14 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import dev.stukalo.asteroids.databinding.ItemAsteroidsWeekBinding
 import dev.stukalo.asteroids.recyclerasteroids.AsteroidsItemAdapter
-import dev.stukalo.repository.model.AsteroidRepo
+import dev.stukalo.common.model.AsteroidUi
 
 class AsteroidsWeekViewHolder(
-    private val binding: ItemAsteroidsWeekBinding
-): RecyclerView.ViewHolder(binding.root) {
-    fun bind(dateToAsteroidList: Pair<String, List<AsteroidRepo>>) {
+    private val binding: ItemAsteroidsWeekBinding,
+) : RecyclerView.ViewHolder(binding.root) {
+    var onItemClick: ((AsteroidUi) -> Unit)? = null
+
+    fun bind(dateToAsteroidList: Pair<String, List<AsteroidUi>>) {
         dateToAsteroidList.apply {
             with(binding) {
                 if (second.isNotEmpty()) {
@@ -18,6 +20,10 @@ class AsteroidsWeekViewHolder(
                     val asteroidsItemAdapter = AsteroidsItemAdapter()
                     asteroidsItemAdapter.submitList(second)
                     rvAsteroidsWeek.adapter = asteroidsItemAdapter
+
+                    asteroidsItemAdapter.onItemClick = {
+                        onItemClick?.invoke(it)
+                    }
                 } else {
                     tvDate.text = null
                     tvDate.isVisible = false

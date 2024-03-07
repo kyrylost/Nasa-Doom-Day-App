@@ -34,12 +34,14 @@ abstract class BaseFragment(
         flow: NavigationDirection?,
         clearBackStackEntry: Boolean,
         deeplink: String?,
+        arg: String,
     ) {
         try {
             (requireActivity() as? Navigable)?.navigateTo(
                 flow,
                 clearBackStackEntry,
                 deeplink,
+                arg,
             )
         } catch (ex: Exception) {
             ex.printStackTrace()

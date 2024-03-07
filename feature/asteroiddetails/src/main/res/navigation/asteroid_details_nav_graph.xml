@@ -6,5 +6,8 @@
     <fragment
         android:id="@+id/fragmentAsteroidDetails"
         android:name="dev.stukalo.asteroiddetails.FragmentAsteroidDetails"
-        android:label="FragmentAsteroidDetails" />
+        android:label="FragmentAsteroidDetails">
+        <argument android:name="arg_one"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -19,19 +19,20 @@ import dev.stukalo.repository.model.MilesRepo
 import dev.stukalo.repository.model.MissDistanceRepo
 import dev.stukalo.repository.model.RelativeVelocityRepo
 
-fun Asteroid.mapToAsteroidRepo() = AsteroidRepo(
-    absoluteMagnitudeH = absoluteMagnitudeH,
-    closeApproachData = closeApproachData?.mapToCloseApproachDataRepo(),
-    estimatedDiameter = estimatedDiameter?.mapToEstimatedDiameterRepo(),
-    id = id,
-    isPotentiallyHazardousAsteroid = isPotentiallyHazardousAsteroid,
-    isSentryObject = isSentryObject,
-    name = name,
-    nasaJplUrl = nasaJplUrl,
-    neoReferenceId = neoReferenceId,
-)
+fun Asteroid.mapToAsteroidRepo() =
+    AsteroidRepo(
+        absoluteMagnitudeH = absoluteMagnitudeH,
+        closeApproachData = closeApproachData?.mapToCloseApproachDataRepo(),
+        estimatedDiameter = estimatedDiameter?.mapToEstimatedDiameterRepo(),
+        id = id,
+        isPotentiallyHazardousAsteroid = isPotentiallyHazardousAsteroid,
+        isSentryObject = isSentryObject,
+        name = name,
+        nasaJplUrl = nasaJplUrl,
+        neoReferenceId = neoReferenceId,
+    )
 
-fun List<CloseApproachData>.mapToCloseApproachDataRepo() : CloseApproachDataRepo{
+fun List<CloseApproachData>.mapToCloseApproachDataRepo(): CloseApproachDataRepo  {
     last().apply {
         return CloseApproachDataRepo(
             closeApproachDate = closeApproachDate,
@@ -39,38 +40,54 @@ fun List<CloseApproachData>.mapToCloseApproachDataRepo() : CloseApproachDataRepo
             epochDateCloseApproach = epochDateCloseApproach,
             missDistance = missDistance?.mapToMissDistanceRepo(),
             orbitingBody = orbitingBody,
-            relativeVelocity = relativeVelocity?.mapToRelativeVelocityRepo()
+            relativeVelocity = relativeVelocity?.mapToRelativeVelocityRepo(),
         )
     }
 }
 
-fun MissDistance.mapToMissDistanceRepo() = MissDistanceRepo(
-    astronomical, kilometers, lunar, miles
-)
+fun MissDistance.mapToMissDistanceRepo() =
+    MissDistanceRepo(
+        astronomical,
+        kilometers,
+        lunar,
+        miles,
+    )
 
-fun RelativeVelocity.mapToRelativeVelocityRepo() = RelativeVelocityRepo(
-    kilometersPerHour, kilometersPerSecond, milesPerHour
-)
+fun RelativeVelocity.mapToRelativeVelocityRepo() =
+    RelativeVelocityRepo(
+        kilometersPerHour,
+        kilometersPerSecond,
+        milesPerHour,
+    )
 
-fun EstimatedDiameter.mapToEstimatedDiameterRepo() = EstimatedDiameterRepo(
-    feet = feet?.mapToFeetRepo(),
-    kilometers = kilometers?.mapToKilometersRepo(),
-    meters = meters?.mapToMetersRepo(),
-    miles = miles?.mapToMilesRepo()
-)
+fun EstimatedDiameter.mapToEstimatedDiameterRepo() =
+    EstimatedDiameterRepo(
+        feet = feet?.mapToFeetRepo(),
+        kilometers = kilometers?.mapToKilometersRepo(),
+        meters = meters?.mapToMetersRepo(),
+        miles = miles?.mapToMilesRepo(),
+    )
 
-fun Feet.mapToFeetRepo() = FeetRepo(
-    estimatedDiameterMax, estimatedDiameterMin
-)
+fun Feet.mapToFeetRepo() =
+    FeetRepo(
+        estimatedDiameterMax,
+        estimatedDiameterMin,
+    )
 
-fun Kilometers.mapToKilometersRepo() = KilometersRepo(
-    estimatedDiameterMax, estimatedDiameterMin
-)
+fun Kilometers.mapToKilometersRepo() =
+    KilometersRepo(
+        estimatedDiameterMax,
+        estimatedDiameterMin,
+    )
 
-fun Meters.mapToMetersRepo() = MetersRepo(
-    estimatedDiameterMax, estimatedDiameterMin
-)
+fun Meters.mapToMetersRepo() =
+    MetersRepo(
+        estimatedDiameterMax,
+        estimatedDiameterMin,
+    )
 
-fun Miles.mapToMilesRepo() = MilesRepo(
-    estimatedDiameterMax, estimatedDiameterMin
-)
+fun Miles.mapToMilesRepo() =
+    MilesRepo(
+        estimatedDiameterMax,
+        estimatedDiameterMin,
+    )

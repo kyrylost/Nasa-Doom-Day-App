@@ -31,14 +31,14 @@ abstract class BaseActivity(
         flow: NavigationDirection?,
         clearBackStackEntry: Boolean,
         deeplink: String?,
+        arg: String,
     ) {
         try {
-            navigator.navigateTo(flow, clearBackStackEntry, deeplink)
+            navigator.navigateTo(flow, clearBackStackEntry, deeplink, arg)
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
     }
 
     abstract fun showLoader(isVisible: Boolean)
-
 }

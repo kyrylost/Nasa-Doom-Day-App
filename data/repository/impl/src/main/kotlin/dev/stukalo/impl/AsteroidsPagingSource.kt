@@ -40,14 +40,15 @@ class AsteroidsPagingSource(
 
         return try {
             val response = asteroidsNetSource.getAsteroids(dateToGet, dateToGet)
-            val asteroids = response.nearEarthObjects?.get(dateToGet)?.map {
-                it.mapToAsteroidRepo()
-            } ?: emptyList()
+            val asteroids =
+                response.nearEarthObjects?.get(dateToGet)?.map {
+                    it.mapToAsteroidRepo()
+                } ?: emptyList()
 
             LoadResult.Page(
                 data = listOf(Pair(dateToGet, asteroids)),
                 prevKey = if (currentDay > 0) currentDay - 1 else null,
-                nextKey = if (currentDay < (dates.count()-1)) currentDay + 1 else null
+                nextKey = if (currentDay < (dates.count() - 1)) currentDay + 1 else null,
             )
         } catch (e: ApiException) {
             Log.e("Load Error", e.toString())

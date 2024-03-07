@@ -4,4 +4,6 @@ sealed class NavigationDirection {
     data object Init : NavigationDirection()
 
     data object Main : NavigationDirection()
+
+    data object AsteroidDetails : NavigationDirection()
 }

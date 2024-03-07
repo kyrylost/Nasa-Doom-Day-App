@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import dev.stukalo.asteroids.databinding.ItemAsteroidBinding
-import dev.stukalo.repository.model.AsteroidRepo
+import dev.stukalo.common.model.AsteroidUi
 
-class AsteroidsItemAdapter: ListAdapter<AsteroidRepo, AsteroidsItemViewHolder>(DIFF_CALLBACK) {
-    var onItemClick: ((AsteroidRepo) -> Unit)? = null
+class AsteroidsItemAdapter : ListAdapter<AsteroidUi, AsteroidsItemViewHolder>(DIFF_CALLBACK) {
+    var onItemClick: ((AsteroidUi) -> Unit)? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -40,17 +40,17 @@ class AsteroidsItemAdapter: ListAdapter<AsteroidRepo, AsteroidsItemViewHolder>(D
 
     companion object {
         private val DIFF_CALLBACK =
-            object : DiffUtil.ItemCallback<AsteroidRepo>() {
+            object : DiffUtil.ItemCallback<AsteroidUi>() {
                 override fun areItemsTheSame(
-                    oldItem: AsteroidRepo,
-                    newItem: AsteroidRepo,
+                    oldItem: AsteroidUi,
+                    newItem: AsteroidUi,
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: AsteroidRepo,
-                    newItem: AsteroidRepo,
+                    oldItem: AsteroidUi,
+                    newItem: AsteroidUi,
                 ): Boolean {
                     return oldItem == newItem
                 }
