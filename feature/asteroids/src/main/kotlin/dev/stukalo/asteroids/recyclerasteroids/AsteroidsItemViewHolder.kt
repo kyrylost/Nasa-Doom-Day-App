@@ -18,22 +18,22 @@ class AsteroidsItemViewHolder(
                 tvHazardousValue.text =
                     if (isPotentiallyHazardousAsteroid == true) {
                         ContextCompat.getString(
-                            context, R.string.yes,
+                            context, dev.stukalo.ui.R.string.yes,
                         )
                     } else {
                         ContextCompat.getString(
-                            context, R.string.no,
+                            context, dev.stukalo.ui.R.string.no,
                         )
                     }
                 tvOrbitingBodyValue.text = closeApproachData?.orbitingBody
                 tvEstimatedDiameterMinValue.text =
                     String.format(
-                        ContextCompat.getString(context, R.string.estimated_diameter_value),
+                        ContextCompat.getString(context, dev.stukalo.ui.R.string.estimated_diameter_value),
                         estimatedDiameter?.kilometers?.estimatedDiameterMin,
                     )
                 tvEstimatedDiameterMaxValue.text =
                     String.format(
-                        ContextCompat.getString(context, R.string.estimated_diameter_value),
+                        ContextCompat.getString(context, dev.stukalo.ui.R.string.estimated_diameter_value),
                         estimatedDiameter?.kilometers?.estimatedDiameterMax,
                     )
             }

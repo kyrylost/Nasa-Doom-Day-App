@@ -32,7 +32,7 @@ fun Asteroid.mapToAsteroidRepo() =
         neoReferenceId = neoReferenceId,
     )
 
-fun List<CloseApproachData>.mapToCloseApproachDataRepo(): CloseApproachDataRepo  {
+fun List<CloseApproachData>.mapToCloseApproachDataRepo(): CloseApproachDataRepo {
     last().apply {
         return CloseApproachDataRepo(
             closeApproachDate = closeApproachDate,

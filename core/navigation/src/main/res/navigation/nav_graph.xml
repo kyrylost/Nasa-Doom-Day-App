@@ -18,7 +18,7 @@
         android:id="@+id/action_global_asteroid_details"
         app:destination="@id/asteroid_details_nav_graph">
         <argument
-            android:name="arg_one"
+            android:name="asteroid_ui_json"
             app:argType="string" />
     </action>
 
