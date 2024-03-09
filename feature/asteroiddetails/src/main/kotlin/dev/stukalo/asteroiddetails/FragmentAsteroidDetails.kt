@@ -4,7 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.stukalo.asteroiddetails.databinding.FragmentAsteroidDetailsBinding
 import dev.stukalo.asteroiddetails.util.AsteroidAdapter
@@ -23,7 +25,7 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
     private val viewBinding: FragmentAsteroidDetailsBinding by viewBinding(FragmentAsteroidDetailsBinding::bind)
     private var jobOnSizeLayout: ViewTreeObserver.OnGlobalLayoutListener? = null
     private var jobOnDistanceLayout: ViewTreeObserver.OnGlobalLayoutListener? = null
-    private var distanceComparisonInitialized: Boolean = false
+    private var sizeComparisonInitialized: Boolean = false
 
     override fun configureUi() {
         super.configureUi()
@@ -31,8 +33,8 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
         asteroidUiJson?.let {
             AsteroidAdapter.fromJson(asteroidUiJson)?.apply {
                 with(viewBinding) {
-                    rgComparison.check(R.id.rb_size)
-                    setupSizeComparison(estimatedDiameter)
+                    rgComparison.check(R.id.rb_distance)
+                    setupDistanceComparison(closeApproachData?.missDistance?.astronomical?.toDouble() ?: 0.0)
 
                     tvName.text = name
                     ibLink.setOnClickListener {
@@ -49,18 +51,26 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
                     setupMissDistanceField(closeApproachData?.missDistance)
                     setupEstimatedDiameterField(estimatedDiameter)
 
+                    ibBack.setOnClickListener {
+                        findNavController().popBackStack()
+                    }
+
+                    ibFavorite.setOnClickListener {
+                        ibFavorite.setColorFilter(ContextCompat.getColor(requireContext(), dev.stukalo.ui.R.color.orange_900))
+                    }
+
                     rgComparison.setOnCheckedChangeListener { _, checkedId ->
                         when (checkedId) {
-                            R.id.rb_size -> {
-                                svDistanceComparison.isVisible = false
-                                zlSizeComparison.isVisible = true
-                            }
                             R.id.rb_distance -> {
                                 svDistanceComparison.isVisible = true
                                 zlSizeComparison.isVisible = false
-                                if (!distanceComparisonInitialized) {
-                                    setupDistanceComparison(closeApproachData?.missDistance?.astronomical?.toDouble() ?: 0.0)
-                                    distanceComparisonInitialized = true
+                            }
+                            R.id.rb_size -> {
+                                svDistanceComparison.isVisible = false
+                                zlSizeComparison.isVisible = true
+                                if (!sizeComparisonInitialized) {
+                                    setupSizeComparison(estimatedDiameter)
+                                    sizeComparisonInitialized = true
                                 }
                             }
                         }

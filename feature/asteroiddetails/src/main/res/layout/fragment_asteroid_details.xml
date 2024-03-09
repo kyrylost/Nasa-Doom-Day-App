@@ -5,13 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/ll_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ib_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_left_btn_background"
+            android:padding="8dp"
+            android:src="@drawable/ic_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/ll_toolbar">
 
         <TextView
             android:id="@+id/tv_name"
@@ -31,6 +52,16 @@
             android:src="@drawable/ic_external_link"
             app:layout_constraintStart_toEndOf="@+id/tv_name"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/ib_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/ic_star_details"
+            app:layout_constraintBottom_toBottomOf="@+id/ib_link"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ib_link"/>
 
         <TextView
             android:id="@+id/tv_id"
@@ -266,19 +297,6 @@
         app:layout_constraintTop_toBottomOf="@id/tv_comparison">
 
         <RadioButton
-            android:id="@+id/rb_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_radio_btn_bg"
-            android:gravity="center"
-            android:button="@null"
-            android:padding="8dp"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:text="@string/size"
-            android:textColor="@drawable/selector_radio_btn_txt_color"/>
-
-        <RadioButton
             android:id="@+id/rb_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -290,6 +308,19 @@
             android:minHeight="0dp"
             android:text="@string/distance"
             android:textColor="@drawable/selector_radio_btn_txt_color" />
+
+        <RadioButton
+            android:id="@+id/rb_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_radio_btn_bg"
+            android:gravity="center"
+            android:button="@null"
+            android:padding="8dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="@string/size"
+            android:textColor="@drawable/selector_radio_btn_txt_color"/>
     </RadioGroup>
 
     <com.otaliastudios.zoom.ZoomLayout
@@ -298,7 +329,7 @@
         android:layout_height="0dp"
         android:padding="16dp"
         android:clipToPadding="false"
-        android:visibility="visible"
+        android:visibility="gone"
         app:minZoom="1"
         app:minZoomType="zoom"
         app:maxZoom="2000"
@@ -332,7 +363,6 @@
         android:padding="16dp"
         android:clipToPadding="false"
         android:fillViewport="true"
-        android:visibility="gone"
         android:id="@+id/sv_distance_comparison"
         android:scrollbarSize="2dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -344,8 +374,8 @@
             android:gravity="center"
             android:layout_marginBottom="4dp">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/ic_asteroid_details"/>
             <Space
                 android:id="@+id/space_between_asteroid_and_earth"
@@ -353,8 +383,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:src="@drawable/ic_earth"/>
             <Space
                 android:id="@+id/space_between_earth_and_sun"

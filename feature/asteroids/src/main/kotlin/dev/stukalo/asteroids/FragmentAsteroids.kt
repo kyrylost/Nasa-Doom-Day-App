@@ -48,6 +48,9 @@ class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
 
     private lateinit var datePicker: MaterialDatePicker<androidx.core.util.Pair<Long?, Long?>>
 
+    private var transitionShowFilters: Transition? = null
+    private var transitionFilters: Transition? = null
+
     override fun configureUi() {
         val localDateFormatter = DateTimeFormatter.ofPattern(DATE_FORMATTER)
 
@@ -62,51 +65,13 @@ class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
         val asteroidsAdapter = AsteroidsWeekAdapter()
         collectFlows(asteroidsAdapter)
         collectLoadState(asteroidsAdapter)
+        setupRecyclerView(asteroidsAdapter)
+        initializeTransitions()
         setupDatePicker()
 
         with(viewBinding) {
-            val transitionShowFilters: Transition =
-                Fade().apply {
-                    duration = 200
-                    addTarget(llShowFilters)
-                }
-
-            val transitionFilters: Transition =
-                Slide(Gravity.TOP).apply {
-                    duration = 400
-                    addTarget(llFilters)
-                    addListener(
-                        object : Transition.TransitionListener {
-                            override fun onTransitionStart(transition: Transition) {
-                                llShowFilters.isVisible = false
-                            }
-
-                            override fun onTransitionEnd(transition: Transition) {
-                                TransitionManager.beginDelayedTransition(clAsteroids, transitionShowFilters)
-                                llShowFilters.isVisible = true
-                            }
-
-                            override fun onTransitionCancel(transition: Transition) {}
-
-                            override fun onTransitionPause(transition: Transition) {}
-
-                            override fun onTransitionResume(transition: Transition) {}
-                        },
-                    )
-                }
-
             tvFrom.text = from
             tvTo.text = to
-
-            rvAsteroids.apply {
-                adapter =
-                    asteroidsAdapter.withLoadStateFooter(
-                        footer = LoadStateAdapter(asteroidsAdapter::retry),
-                    )
-                asteroidsAdapter.onItemClick = {
-                    navigateTo(NavigationDirection.AsteroidDetails, arg = AsteroidAdapter.toJson(it))
-                }
-            }
 
             llShowFilters.setOnClickListener {
                 TransitionManager.beginDelayedTransition(clAsteroids, transitionFilters)
@@ -123,6 +88,59 @@ class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
                     showOnlyHazardous = cbHazardous.isChecked
                     getAsteroids(tvFrom.text.toString(), tvTo.text.toString(), cbDesc.isChecked)
                 }
+            }
+        }
+    }
+
+    private fun initializeTransitions() {
+
+        var nextRotationValue = 180F
+
+        with(viewBinding) {
+            transitionShowFilters = Fade().apply {
+                duration = 200
+                addTarget(llShowFilters)
+            }
+
+            transitionFilters = Slide(Gravity.TOP).apply {
+                duration = 400
+                addTarget(llFilters)
+                addListener(
+                    object : Transition.TransitionListener {
+                        override fun onTransitionStart(transition: Transition) {
+                            llShowFilters.isVisible = false
+                            ivDown.rotation = nextRotationValue
+                            nextRotationValue = if (nextRotationValue == 0F) {
+                                180F
+                            } else {
+                                0F
+                            }
+                        }
+
+                        override fun onTransitionEnd(transition: Transition) {
+                            TransitionManager.beginDelayedTransition(clAsteroids, transitionShowFilters)
+                            llShowFilters.isVisible = true
+                        }
+
+                        override fun onTransitionCancel(transition: Transition) {}
+
+                        override fun onTransitionPause(transition: Transition) {}
+
+                        override fun onTransitionResume(transition: Transition) {}
+                    },
+                )
+            }
+        }
+    }
+
+    private fun setupRecyclerView(asteroidsWeekAdapter: AsteroidsWeekAdapter) {
+        viewBinding.rvAsteroids.apply {
+            adapter =
+                asteroidsWeekAdapter.withLoadStateFooter(
+                    footer = LoadStateAdapter(asteroidsWeekAdapter::retry),
+                )
+            asteroidsWeekAdapter.onItemClick = {
+                navigateTo(NavigationDirection.AsteroidDetails, arg = AsteroidAdapter.toJson(it))
             }
         }
     }
