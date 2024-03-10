@@ -26,6 +26,7 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 const val CERES_DIAMETER = 939.4
+const val DATE_TIME_FORMATTER = "yyyy MMM dd HH:mm"
 
 class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details) {
     private val viewBinding: FragmentAsteroidDetailsBinding by viewBinding(FragmentAsteroidDetailsBinding::bind)
@@ -154,7 +155,7 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
     private fun getDatetime(timestamp: Long?): String? {
         return timestamp?.run {
             val dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault())
-            val formatter = DateTimeFormatter.ofPattern("yyyy MMM dd HH:mm") // move
+            val formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER)
             dateTime.format(formatter)
         }
     }

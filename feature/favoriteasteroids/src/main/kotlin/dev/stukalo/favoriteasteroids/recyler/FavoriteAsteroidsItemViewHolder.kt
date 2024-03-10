@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.stukalo.common.model.AsteroidUi
 import dev.stukalo.favoriteasteroids.R
 import dev.stukalo.favoriteasteroids.databinding.ItemFavoriteAsteroidBinding
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 class FavoriteAsteroidsItemViewHolder(
     val binding: ItemFavoriteAsteroidBinding,
@@ -36,8 +39,26 @@ class FavoriteAsteroidsItemViewHolder(
                             context, R.string.favorite_asteroid_not_hazardous,
                         )
                     }
-                chronometerTimer.base = SystemClock.elapsedRealtime() + 20000
-                chronometerTimer.start()
+
+                val dateTime = LocalDateTime.ofInstant(
+                    Instant.ofEpochMilli(closeApproachData?.epochDateCloseApproach ?: 0),
+                    ZoneId.systemDefault()
+                )
+
+                val futureTimeSeconds = dateTime.atZone(ZoneId.systemDefault()).toEpochSecond()
+                val currentTimeSeconds = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
+
+                val countdownTimeSeconds = futureTimeSeconds - currentTimeSeconds
+
+                with(chronometerTimer) {
+                    base = SystemClock.elapsedRealtime() + (countdownTimeSeconds * 1000)
+                    if (text[0] == '-') {
+                        text = ContextCompat.getString(context, R.string.already_passed)
+                    }
+                    else {
+                        start()
+                    }
+                }
             }
         }
     }
