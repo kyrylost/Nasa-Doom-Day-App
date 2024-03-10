@@ -19,10 +19,10 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import dev.stukalo.asteroids.databinding.FragmentAsteroidsBinding
 import dev.stukalo.asteroids.loadstate.LoadStateAdapter
 import dev.stukalo.asteroids.recyclerweeks.AsteroidsWeekAdapter
-import dev.stukalo.common.utils.AsteroidAdapter
 import dev.stukalo.asteroids.util.RangeDateValidator
 import dev.stukalo.common.Constants.DATE_FORMATTER
 import dev.stukalo.common.exception.ApiException
+import dev.stukalo.common.utils.AsteroidAdapter
 import dev.stukalo.navigation.NavigationDirection
 import dev.stukalo.platform.BaseFragment
 import kotlinx.coroutines.flow.collectLatest
@@ -93,43 +93,45 @@ class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
     }
 
     private fun initializeTransitions() {
-
         var nextRotationValue = 180F
 
         with(viewBinding) {
-            transitionShowFilters = Fade().apply {
-                duration = 200
-                addTarget(llShowFilters)
-            }
+            transitionShowFilters =
+                Fade().apply {
+                    duration = 200
+                    addTarget(llShowFilters)
+                }
 
-            transitionFilters = Slide(Gravity.TOP).apply {
-                duration = 400
-                addTarget(llFilters)
-                addListener(
-                    object : Transition.TransitionListener {
-                        override fun onTransitionStart(transition: Transition) {
-                            llShowFilters.isVisible = false
-                            ivDown.rotation = nextRotationValue
-                            nextRotationValue = if (nextRotationValue == 0F) {
-                                180F
-                            } else {
-                                0F
+            transitionFilters =
+                Slide(Gravity.TOP).apply {
+                    duration = 400
+                    addTarget(llFilters)
+                    addListener(
+                        object : Transition.TransitionListener {
+                            override fun onTransitionStart(transition: Transition) {
+                                llShowFilters.isVisible = false
+                                ivDown.rotation = nextRotationValue
+                                nextRotationValue =
+                                    if (nextRotationValue == 0F) {
+                                        180F
+                                    } else {
+                                        0F
+                                    }
                             }
-                        }
 
-                        override fun onTransitionEnd(transition: Transition) {
-                            TransitionManager.beginDelayedTransition(clAsteroids, transitionShowFilters)
-                            llShowFilters.isVisible = true
-                        }
+                            override fun onTransitionEnd(transition: Transition) {
+                                TransitionManager.beginDelayedTransition(clAsteroids, transitionShowFilters)
+                                llShowFilters.isVisible = true
+                            }
 
-                        override fun onTransitionCancel(transition: Transition) {}
+                            override fun onTransitionCancel(transition: Transition) {}
 
-                        override fun onTransitionPause(transition: Transition) {}
+                            override fun onTransitionPause(transition: Transition) {}
 
-                        override fun onTransitionResume(transition: Transition) {}
-                    },
-                )
-            }
+                            override fun onTransitionResume(transition: Transition) {}
+                        },
+                    )
+                }
         }
     }
 

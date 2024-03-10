@@ -23,8 +23,8 @@ class FavoriteAsteroidsItemViewHolder(
                     if (isPotentiallyHazardousAsteroid == true) {
                         tvFavoritePotentiallyHazardous.setTextColor(
                             ContextCompat.getColor(
-                                context, dev.stukalo.ui.R.color.red_900
-                            )
+                                context, dev.stukalo.ui.R.color.red_900,
+                            ),
                         )
                         ContextCompat.getString(
                             context, R.string.favorite_asteroid_hazardous,
@@ -32,18 +32,19 @@ class FavoriteAsteroidsItemViewHolder(
                     } else {
                         tvFavoritePotentiallyHazardous.setTextColor(
                             ContextCompat.getColor(
-                                context, dev.stukalo.ui.R.color.green_900
-                            )
+                                context, dev.stukalo.ui.R.color.green_900,
+                            ),
                         )
                         ContextCompat.getString(
                             context, R.string.favorite_asteroid_not_hazardous,
                         )
                     }
 
-                val dateTime = LocalDateTime.ofInstant(
-                    Instant.ofEpochMilli(closeApproachData?.epochDateCloseApproach ?: 0),
-                    ZoneId.systemDefault()
-                )
+                val dateTime =
+                    LocalDateTime.ofInstant(
+                        Instant.ofEpochMilli(closeApproachData?.epochDateCloseApproach ?: 0),
+                        ZoneId.systemDefault(),
+                    )
 
                 val futureTimeSeconds = dateTime.atZone(ZoneId.systemDefault()).toEpochSecond()
                 val currentTimeSeconds = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
@@ -54,8 +55,7 @@ class FavoriteAsteroidsItemViewHolder(
                     base = SystemClock.elapsedRealtime() + (countdownTimeSeconds * 1000)
                     if (text[0] == '-') {
                         text = ContextCompat.getString(context, R.string.already_passed)
-                    }
-                    else {
+                    } else {
                         start()
                     }
                 }

@@ -43,8 +43,11 @@ dependencies {
     implementation(libs.material)
 
     implementation(libs.hilt.android)
+    implementation(libs.android.hilt.work)
     ksp(libs.android.hilt.compiler)
     ksp(libs.hilt.compiler)
+
+    implementation(libs.work.runtime.ktx)
 
     implementation(project(":feature:main"))
     implementation(project(":feature:init"))
@@ -69,4 +72,6 @@ dependencies {
     implementation(project(":data:repository:network:impl"))
     implementation(project(":data:repository:database"))
     implementation(project(":data:repository:database:impl"))
+
+    implementation(project(":data:worker"))
 }

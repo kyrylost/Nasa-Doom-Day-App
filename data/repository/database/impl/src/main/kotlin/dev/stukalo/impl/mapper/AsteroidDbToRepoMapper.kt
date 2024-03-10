@@ -27,19 +27,21 @@ fun AsteroidDb.mapToAsteroidRepo() =
         id = id,
         isPotentiallyHazardousAsteroid = isPotentiallyHazardousAsteroid,
         isSentryObject = isSentryObject,
+        isShownToUser = isShownToUser,
         name = name,
         nasaJplUrl = nasaJplUrl,
         neoReferenceId = neoReferenceId,
     )
 
-fun CloseApproachDataDb.mapToCloseApproachDataRepo() =  CloseApproachDataRepo(
-    closeApproachDate = closeApproachDate,
-    closeApproachDateFull = closeApproachDateFull,
-    epochDateCloseApproach = epochDateCloseApproach,
-    missDistance = missDistance?.mapToMissDistanceRepo(),
-    orbitingBody = orbitingBody,
-    relativeVelocity = relativeVelocity?.mapToRelativeVelocityRepo(),
-)
+fun CloseApproachDataDb.mapToCloseApproachDataRepo() =
+    CloseApproachDataRepo(
+        closeApproachDate = closeApproachDate,
+        closeApproachDateFull = closeApproachDateFull,
+        epochDateCloseApproach = epochDateCloseApproach,
+        missDistance = missDistance?.mapToMissDistanceRepo(),
+        orbitingBody = orbitingBody,
+        relativeVelocity = relativeVelocity?.mapToRelativeVelocityRepo(),
+    )
 
 fun MissDistanceDb.mapToMissDistanceRepo() =
     MissDistanceRepo(

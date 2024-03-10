@@ -1,10 +1,12 @@
 package dev.stukalo.navigation
 
+import android.net.Uri
+
 interface Navigable {
     fun navigateTo(
         flow: NavigationDirection? = null,
         clearBackStackEntry: Boolean = false,
-        deeplink: String? = null,
+        deeplink: Uri? = null,
         arg: String = "",
     )
 }

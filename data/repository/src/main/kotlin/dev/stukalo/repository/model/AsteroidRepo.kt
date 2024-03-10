@@ -7,6 +7,7 @@ data class AsteroidRepo(
     val id: String?,
     val isPotentiallyHazardousAsteroid: Boolean?,
     val isSentryObject: Boolean?,
+    val isShownToUser: Boolean = false,
     val name: String?,
     val nasaJplUrl: String?,
     val neoReferenceId: String?,

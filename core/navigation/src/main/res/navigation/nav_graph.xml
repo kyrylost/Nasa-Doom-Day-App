@@ -20,6 +20,9 @@
         <argument
             android:name="asteroid_ui_json"
             app:argType="string" />
+        <argument
+            android:name="navigate_from_push"
+            app:argType="boolean" />
     </action>
 
 </navigation>

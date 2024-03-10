@@ -39,10 +39,19 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
         super.configureUi()
         collectSharedFlows()
         val asteroidUiJson = arguments?.getString("asteroid_ui_json")
+
         asteroidUiJson?.let {
             AsteroidAdapter.fromJson(asteroidUiJson)?.apply {
                 lifecycleScope.launch {
-                    val isAsteroidInFavorite = viewModel.isAsteroidInFavorite(id)
+                    val isAsteroidInFavorite =
+                        with(viewModel) {
+                            val navigateFromPush = arguments?.getBoolean("navigate_from_push")
+                            if (navigateFromPush == true) {
+                                updateIsShownField(id)
+                            }
+                            isAsteroidInFavorite(id)
+                        }
+
                     with(viewBinding) {
                         rgComparison.check(R.id.rb_distance)
                         setupDistanceComparison(closeApproachData?.missDistance?.astronomical?.toDouble() ?: 0.0)
@@ -66,7 +75,8 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
                             ibFavorite.setColorFilter(
                                 ContextCompat.getColor(
                                     requireContext(),
-                                    dev.stukalo.ui.R.color.orange_900),
+                                    dev.stukalo.ui.R.color.orange_900,
+                                ),
                             )
                         } else {
                             ibFavorite.setOnClickListener {
@@ -108,13 +118,14 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
                         viewBinding.ibFavorite.setColorFilter(
                             ContextCompat.getColor(
                                 requireContext(),
-                                dev.stukalo.ui.R.color.orange_900),
+                                dev.stukalo.ui.R.color.orange_900,
+                            ),
                         )
                         operationSucceedSnackBar(
                             String.format(
                                 getString(R.string.asteroid_added),
                                 name,
-                            )
+                            ),
                         )
                     } else {
                         operationFailedSnackBar(getString(R.string.asteroid_not_added))

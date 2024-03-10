@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.stukalo.impl"
+    namespace = "dev.stukalo.worker"
     compileSdk = ConfigData.COMPILE_SDK
 
     defaultConfig {
@@ -22,11 +22,14 @@ android {
 }
 
 dependencies {
+    implementation(libs.work.runtime.ktx)
     implementation(libs.hilt.android)
+    implementation(libs.android.hilt.common)
+    implementation(libs.android.hilt.work)
     ksp(libs.android.hilt.compiler)
     ksp(libs.hilt.compiler)
 
+    implementation(project(":core:common"))
     implementation(project(":data:repository"))
     implementation(project(":data:repository:database"))
-    implementation(project(":data:database"))
 }

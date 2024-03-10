@@ -1,10 +1,14 @@
 package dev.stukalo.main
 
 import android.graphics.Color
+import android.net.Uri
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,6 +16,7 @@ import dev.stukalo.main.databinding.ActivityHostBinding
 import dev.stukalo.main.databinding.ViewSnackbarBinding
 import dev.stukalo.navigation.NavigationDirection
 import dev.stukalo.platform.BaseActivity
+import dev.stukalo.worker.CheckForApproachingAsteroidsWorker
 
 @AndroidEntryPoint
 class ActivityHost : BaseActivity(R.layout.activity_host) {
@@ -27,12 +32,24 @@ class ActivityHost : BaseActivity(R.layout.activity_host) {
                     navigator.navController = navController
                 }
             }
+
+        val workRequest =
+            OneTimeWorkRequest.Builder(CheckForApproachingAsteroidsWorker::class.java)
+                .build()
+
+        WorkManager.getInstance(this).enqueue(workRequest) // remove on release
+
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+            "CheckForApproachingAsteroidsWork",
+            ExistingPeriodicWorkPolicy.UPDATE,
+            CheckForApproachingAsteroidsWorker.createPeriodicRequest(),
+        )
     }
 
     override fun navigateTo(
         flow: NavigationDirection?,
         clearBackStackEntry: Boolean,
-        deeplink: String?,
+        deeplink: Uri?,
         arg: String,
     ) {
         navigator.navigateTo(flow, clearBackStackEntry, deeplink, arg)

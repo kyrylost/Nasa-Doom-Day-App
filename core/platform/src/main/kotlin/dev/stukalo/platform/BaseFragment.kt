@@ -1,5 +1,6 @@
 package dev.stukalo.platform
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +34,7 @@ abstract class BaseFragment(
     override fun navigateTo(
         flow: NavigationDirection?,
         clearBackStackEntry: Boolean,
-        deeplink: String?,
+        deeplink: Uri?,
         arg: String,
     ) {
         try {

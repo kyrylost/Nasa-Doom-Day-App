@@ -2,8 +2,8 @@ package dev.stukalo.impl
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import dev.stukalo.impl.dao.AsteroidsDao
 import dev.stukalo.database.model.AsteroidDb
+import dev.stukalo.impl.dao.AsteroidsDao
 
 @Database(
     entities = [

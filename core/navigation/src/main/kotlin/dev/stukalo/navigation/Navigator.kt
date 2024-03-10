@@ -1,7 +1,6 @@
 package dev.stukalo.navigation
 
 import android.net.Uri
-import android.util.Log
 import androidx.navigation.NavController
 
 class Navigator {
@@ -10,14 +9,14 @@ class Navigator {
     fun navigateTo(
         navigationDirection: NavigationDirection?,
         clearBackStackEntry: Boolean = false,
-        deeplink: String? = null,
+        deeplink: Uri? = null,
         arg: String = "",
     ) {
         with(navController) {
             if (clearBackStackEntry) {
                 popBackStack()
             }
-            if (deeplink.isNullOrEmpty()) {
+            if (deeplink == null || deeplink.toString().isEmpty()) {
                 when (navigationDirection) {
                     is NavigationDirection.Main -> navigateToMain()
                     is NavigationDirection.AsteroidDetails -> navigateToAsteroidDetails(arg)
@@ -26,7 +25,10 @@ class Navigator {
                     }
                 }
             } else {
-                navigate(Uri.parse(deeplink))
+                if (deeplink.host == "details") {
+                    val asteroidJson = deeplink.toString().split("asteroid_ui_json=")[1]
+                    navigateToAsteroidDetails(asteroidJson, true)
+                }
             }
         }
     }
@@ -35,8 +37,12 @@ class Navigator {
         navController.navigate(NavGraphDirections.actionGlobalMain())
     }
 
-    private fun navigateToAsteroidDetails(arg: String) {
-        Log.d("TDXCGHBJMKL", arg)
-        navController.navigate(NavGraphDirections.actionGlobalAsteroidDetails(arg))
+    private fun navigateToAsteroidDetails(
+        asteroidUiJson: String,
+        navigateFromPush: Boolean = false,
+    ) {
+        navController.navigate(
+            NavGraphDirections.actionGlobalAsteroidDetails(asteroidUiJson, navigateFromPush),
+        )
     }
 }

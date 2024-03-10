@@ -14,7 +14,7 @@ import dev.stukalo.favoriteasteroids.util.OnSwipeListener
 
 @SuppressLint("ClickableViewAccessibility")
 class FavoriteAsteroidsItemAdapter(
-    private val context: Context
+    private val context: Context,
 ) : ListAdapter<AsteroidUi, FavoriteAsteroidsItemViewHolder>(DIFF_CALLBACK) {
     val displayMetrics: DisplayMetrics = context.resources.displayMetrics
     val screenWidth = displayMetrics.widthPixels.toFloat()
@@ -71,7 +71,7 @@ class FavoriteAsteroidsItemAdapter(
                                                         displayMetrics,
                                                     ),
                                                 )
-                                            ),
+                                        ),
                                     )
                                     duration = 100
                                     start()

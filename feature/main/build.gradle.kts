@@ -8,27 +8,13 @@ plugins {
 
 android {
     namespace = "dev.stukalo.main"
-//    compileSdk = 34
-//
-//    defaultConfig {
-//        minSdk = 26
-//    }
-//
-//    compileOptions {
-//        sourceCompatibility = JavaVersion.VERSION_1_8
-//        targetCompatibility = JavaVersion.VERSION_1_8
-//    }
-//    kotlinOptions {
-//        jvmTarget = "1.8"
-//    }
 }
 
 dependencies {
-
     implementation(libs.hilt.android)
     ksp(libs.android.hilt.compiler)
     ksp(libs.hilt.compiler)
-//    implementation(libs.core.ktx)
-//    implementation(libs.appcompat)
-//    implementation(libs.material)
+
+    implementation(libs.work.runtime.ktx)
+    implementation(project(":data:worker"))
 }

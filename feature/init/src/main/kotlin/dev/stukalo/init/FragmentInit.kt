@@ -5,6 +5,10 @@ import dev.stukalo.platform.BaseFragment
 
 class FragmentInit : BaseFragment(R.layout.fragment_init) {
     override fun configureUi() {
-        navigateTo(NavigationDirection.Main)
+        if (requireActivity().intent.data != null) {
+            navigateTo(deeplink = requireActivity().intent.data)
+        } else {
+            navigateTo(NavigationDirection.Main)
+        }
     }
 }

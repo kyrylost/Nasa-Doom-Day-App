@@ -16,37 +16,49 @@ import javax.inject.Inject
 import kotlin.coroutines.resume
 
 @HiltViewModel
-class AsteroidDetailsViewModel @Inject constructor(
-    private val favoriteAsteroidsRepository: FavoriteAsteroidsRepository
-) : ViewModel() {
+class AsteroidDetailsViewModel
+    @Inject
+    constructor(
+        private val favoriteAsteroidsRepository: FavoriteAsteroidsRepository,
+    ) : ViewModel() {
+        private val _addStatusSharedFlow = MutableSharedFlow<String?>()
+        val addStatusSharedFlow = _addStatusSharedFlow.asSharedFlow()
 
-    private val _addStatusSharedFlow = MutableSharedFlow<String?>()
-    val addStatusSharedFlow = _addStatusSharedFlow.asSharedFlow()
+        fun addToFavorite(asteroidUi: AsteroidUi) {
+            viewModelScope.launch(Dispatchers.IO) {
+                val asteroidRepo = asteroidUi.mapToAsteroidRepo()
+                if (asteroidRepo?.id != null) {
+                    favoriteAsteroidsRepository.insertAsteroid(asteroidRepo).also {
+                        if (it != -1L) {
+                            _addStatusSharedFlow.emit(asteroidUi.name)
+                        } else {
+                            _addStatusSharedFlow.emit(null)
+                        }
+                    }
+                } else {
+                    _addStatusSharedFlow.emit(null)
+                }
+            }
+        }
 
-    fun addToFavorite(asteroidUi: AsteroidUi) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val asteroidRepo= asteroidUi.mapToAsteroidRepo()
-            if (asteroidRepo?.id != null) {
-                favoriteAsteroidsRepository.insertAsteroid(asteroidRepo).also {
-                    if (it != -1L) {
-                        _addStatusSharedFlow.emit(asteroidUi.name)
+        suspend fun isAsteroidInFavorite(id: String?): Boolean {
+            return withContext(Dispatchers.IO) {
+                suspendCancellableCoroutine { continuation ->
+                    val asteroid = favoriteAsteroidsRepository.getAsteroidById(id)
+                    if (asteroid != null) {
+                        continuation.resume(true)
                     } else {
-                        _addStatusSharedFlow.emit(null)
+                        continuation.resume(false)
                     }
                 }
-            } else {
-                _addStatusSharedFlow.emit(null)
             }
         }
-    }
 
-    suspend fun isAsteroidInFavorite(id: String?) : Boolean {
-        return withContext(Dispatchers.IO) {
-            suspendCancellableCoroutine { continuation ->
-                val asteroid = favoriteAsteroidsRepository.getAsteroidById(id)
-                if (asteroid != null) continuation.resume(true)
-                else continuation.resume(false)
+        fun updateIsShownField(id: String?) {
+            viewModelScope.launch(Dispatchers.IO) {
+                id?.let {
+                    favoriteAsteroidsRepository.updateIsShownField(id, true)
+                }
             }
         }
     }
-}

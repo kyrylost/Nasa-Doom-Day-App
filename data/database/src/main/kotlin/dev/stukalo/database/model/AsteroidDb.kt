@@ -12,6 +12,7 @@ data class AsteroidDb(
     @Embedded val estimatedDiameter: EstimatedDiameterDb?,
     val isPotentiallyHazardousAsteroid: Boolean?,
     val isSentryObject: Boolean?,
+    val isShownToUser: Boolean = false,
     val name: String?,
     val nasaJplUrl: String?,
     val neoReferenceId: String?,

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.stukalo.impl"
+    namespace = "dev.stukalo.database"
     compileSdk = ConfigData.COMPILE_SDK
 
     defaultConfig {

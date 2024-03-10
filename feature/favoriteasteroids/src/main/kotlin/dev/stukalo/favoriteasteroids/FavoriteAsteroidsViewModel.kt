@@ -15,47 +15,49 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteAsteroidsViewModel @Inject constructor(
-    private val favoriteAsteroidsRepository: FavoriteAsteroidsRepository
-) : ViewModel() {
-    private val _favoriteAsteroidsStateFlow = MutableStateFlow(FavoriteAsteroidsUiState())
-    val favoriteAsteroidsStateFlow = _favoriteAsteroidsStateFlow.asStateFlow()
+class FavoriteAsteroidsViewModel
+    @Inject
+    constructor(
+        private val favoriteAsteroidsRepository: FavoriteAsteroidsRepository,
+    ) : ViewModel() {
+        private val _favoriteAsteroidsStateFlow = MutableStateFlow(FavoriteAsteroidsUiState())
+        val favoriteAsteroidsStateFlow = _favoriteAsteroidsStateFlow.asStateFlow()
 
-    private var collectorJob: Job? = null
+        private var collectorJob: Job? = null
 
-    data class FavoriteAsteroidsUiState(
-        val favoriteAsteroids: List<AsteroidUi> = emptyList(),
-    )
+        data class FavoriteAsteroidsUiState(
+            val favoriteAsteroids: List<AsteroidUi> = emptyList(),
+        )
 
-    fun collectAsteroids() {
-        collectorJob =
-            viewModelScope.launch {
-                favoriteAsteroidsRepository.getFavoriteAsteroids().collect { listOfAsteroids ->
-                    if (listOfAsteroids != null) {
-                        _favoriteAsteroidsStateFlow.update { state ->
-                            state.copy(
-                                favoriteAsteroids =
-                                listOfAsteroids.map {
-                                    it.mapToAsteroidUi()
-                                },
-                            )
-                        }
-                    } else {
-                        _favoriteAsteroidsStateFlow.update {
-                            it.copy(favoriteAsteroids = emptyList())
+        fun collectAsteroids() {
+            collectorJob =
+                viewModelScope.launch {
+                    favoriteAsteroidsRepository.getFavoriteAsteroids().collect { listOfAsteroids ->
+                        if (listOfAsteroids != null) {
+                            _favoriteAsteroidsStateFlow.update { state ->
+                                state.copy(
+                                    favoriteAsteroids =
+                                        listOfAsteroids.map {
+                                            it.mapToAsteroidUi()
+                                        },
+                                )
+                            }
+                        } else {
+                            _favoriteAsteroidsStateFlow.update {
+                                it.copy(favoriteAsteroids = emptyList())
+                            }
                         }
                     }
                 }
-            }
-    }
+        }
 
-    fun deleteAsteroid(id: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            favoriteAsteroidsRepository.deleteAsteroid(id)
+        fun deleteAsteroid(id: String) {
+            viewModelScope.launch(Dispatchers.IO) {
+                favoriteAsteroidsRepository.deleteAsteroid(id)
+            }
+        }
+
+        fun stopCollectors() {
+            collectorJob?.cancel()
         }
     }
-
-    fun stopCollectors() {
-        collectorJob?.cancel()
-    }
-}

@@ -17,6 +17,8 @@ room = "2.6.1"
 hilt-version = "2.50"
 hilt-compiler-version = "1.2.0"
 
+work-runtime-version = "2.9.0"
+
 viewbindingpropertydelegate-version = "1.5.9"
 
 junit = "4.13.2"
@@ -48,7 +50,10 @@ hilt-plugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin"
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt-version" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt-version" }
 android-hilt-common = { group = "androidx.hilt", name = "hilt-common", version.ref = "hilt-compiler-version" }
+android-hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hilt-compiler-version" }
 android-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hilt-compiler-version" }
+
+work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work-runtime-version" }
 
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }

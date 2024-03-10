@@ -11,4 +11,9 @@ interface AsteroidsDataSource {
     fun getAsteroids(): Flow<List<AsteroidDb>?>
 
     fun deleteAsteroid(id: String)
+
+    fun updateIsShownField(
+        id: String,
+        isShown: Boolean,
+    )
 }

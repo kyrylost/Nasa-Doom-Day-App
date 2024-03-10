@@ -20,4 +20,10 @@ interface AsteroidsDao {
 
     @Query("DELETE FROM asteroids WHERE id = :id")
     fun deleteAsteroid(id: String)
+
+    @Query("UPDATE asteroids SET isShownToUser = :isShown WHERE id =:id")
+    fun updateIsShownField(
+        id: String,
+        isShown: Boolean,
+    )
 }

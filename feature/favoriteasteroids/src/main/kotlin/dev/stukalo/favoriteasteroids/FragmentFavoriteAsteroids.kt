@@ -1,12 +1,10 @@
 package dev.stukalo.favoriteasteroids
 
-import android.net.Uri
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.stukalo.common.utils.AsteroidAdapter
@@ -17,7 +15,6 @@ import dev.stukalo.platform.BaseFragment
 import kotlinx.coroutines.launch
 
 class FragmentFavoriteAsteroids : BaseFragment(R.layout.fragment_favorite_asteroids) {
-
     private val viewBinding: FragmentFavoriteAsteroidsBinding by viewBinding(FragmentFavoriteAsteroidsBinding::bind)
     private val viewModel: FavoriteAsteroidsViewModel by activityViewModels()
 
@@ -64,5 +61,4 @@ class FragmentFavoriteAsteroids : BaseFragment(R.layout.fragment_favorite_astero
             }
         }
     }
-
 }
