@@ -1,8 +1,6 @@
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.org.jetbrains.kotlin.android.get().pluginId)
-    id(libs.plugins.hilt.android.plugin.get().pluginId)
-    id(libs.plugins.google.hilt.android.plugin.get().pluginId)
     id(libs.plugins.ksp.get().pluginId)
 }
 

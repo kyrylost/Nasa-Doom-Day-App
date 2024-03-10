@@ -6,9 +6,9 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.stukalo.asteroids.util.mapToAsteroidUi
+import dev.stukalo.asteroids.util.mapper.mapToAsteroidUi
 import dev.stukalo.common.model.AsteroidUi
-import dev.stukalo.repository.repo.AsteroidsRepository
+import dev.stukalo.network.repo.AsteroidsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -19,7 +19,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import dev.stukalo.asteroids.databinding.FragmentAsteroidsBinding
 import dev.stukalo.asteroids.loadstate.LoadStateAdapter
 import dev.stukalo.asteroids.recyclerweeks.AsteroidsWeekAdapter
-import dev.stukalo.asteroids.util.AsteroidAdapter
+import dev.stukalo.common.utils.AsteroidAdapter
 import dev.stukalo.asteroids.util.RangeDateValidator
 import dev.stukalo.common.Constants.DATE_FORMATTER
 import dev.stukalo.common.exception.ApiException

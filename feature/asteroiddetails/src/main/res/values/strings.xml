@@ -24,4 +24,6 @@
     <string name="details_max">Max:</string>
     <string name="size">Size</string>
     <string name="distance">Distance</string>
+    <string name="asteroid_added">Asteroid %s successfully added to favorite</string>
+    <string name="asteroid_not_added">Cannot add asteroid to favorite</string>
 </resources>

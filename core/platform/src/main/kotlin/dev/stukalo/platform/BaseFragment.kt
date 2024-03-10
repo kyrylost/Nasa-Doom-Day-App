@@ -53,4 +53,12 @@ abstract class BaseFragment(
     fun showLoader(isVisible: Boolean) {
         requireBaseActivity().showLoader(isVisible)
     }
+
+    fun operationSucceedSnackBar(message: String) {
+        requireBaseActivity().operationSucceedSnackBar(message, requireView())
+    }
+
+    fun operationFailedSnackBar(message: String) {
+        requireBaseActivity().operationFailedSnackBar(message, requireView())
+    }
 }

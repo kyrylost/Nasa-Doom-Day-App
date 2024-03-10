@@ -12,10 +12,6 @@ android {
         minSdk = ConfigData.MIN_SDK
     }
 
-    buildFeatures {
-        viewBinding = true
-    }
-
     compileOptions {
         sourceCompatibility = org.gradle.api.JavaVersion.VERSION_11
         targetCompatibility = org.gradle.api.JavaVersion.VERSION_11
@@ -26,11 +22,6 @@ android {
 }
 
 dependencies {
-
-//    implementation(libs.core.ktx)
-//    implementation(libs.appcompat)
-//    implementation(libs.material)
-//    testImplementation(libs.junit)
-//    androidTestImplementation(libs.androidx.test.ext.junit)
-//    androidTestImplementation(libs.espresso.core)
+    implementation(libs.room.ktx)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 }

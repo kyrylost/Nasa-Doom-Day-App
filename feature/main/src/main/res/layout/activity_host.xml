@@ -13,6 +13,13 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"/>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/snackbar_anchor_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.92"
+        android:orientation="horizontal" />
+
     <ProgressBar
         android:id="@+id/pb_loader"
         android:indeterminateDrawable="@drawable/style_pb"

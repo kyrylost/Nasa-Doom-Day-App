@@ -1,6 +1,7 @@
 package dev.stukalo.platform
 
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -41,4 +42,14 @@ abstract class BaseActivity(
     }
 
     abstract fun showLoader(isVisible: Boolean)
+
+    abstract fun operationSucceedSnackBar(
+        message: String,
+        view: View,
+    )
+
+    abstract fun operationFailedSnackBar(
+        message: String,
+        view: View,
+    )
 }

@@ -62,6 +62,11 @@ dependencies {
 
     implementation(project(":data:network"))
     implementation(project(":data:network:impl"))
+    implementation(project(":data:database"))
+    implementation(project(":data:database:impl"))
     implementation(project(":data:repository"))
-    implementation(project(":data:repository:impl"))
+    implementation(project(":data:repository:network"))
+    implementation(project(":data:repository:network:impl"))
+    implementation(project(":data:repository:database"))
+    implementation(project(":data:repository:database:impl"))
 }

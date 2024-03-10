@@ -19,9 +19,3 @@ android {
         jvmTarget = ConfigData.JVM_TARGET
     }
 }
-
-dependencies {
-    implementation(libs.paging.runtime)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
-    implementation(project(":data:network"))
-}

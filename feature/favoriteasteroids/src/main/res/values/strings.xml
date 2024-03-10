@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favorite_asteroid_hazardous">Potentially hazardous</string>
+    <string name="favorite_asteroid_not_hazardous">Not potentially hazardous</string>
+    <string name="delete">Delete</string>
+</resources>

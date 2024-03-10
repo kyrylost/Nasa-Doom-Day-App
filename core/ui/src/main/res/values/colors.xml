@@ -6,8 +6,10 @@
     <color name="primary_light">#202035</color>
     <color name="dark_blue_500">#193B87</color>
     <color name="dark_blue_700">#0D1E44</color>
+    <color name="green_300">#BEE0CF</color>
     <color name="green_900">#339D66</color>
     <color name="orange_900">#F89E16</color>
+    <color name="red_300">#FCB7A2</color>
     <color name="red_900">#F84C16</color>
     <color name="gray_50">#FCFCFC</color>
     <color name="gray_100">#F1F1F1</color>

@@ -6,6 +6,10 @@ import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.stukalo.asteroiddetails.databinding.FragmentAsteroidDetailsBinding
@@ -14,6 +18,8 @@ import dev.stukalo.common.model.EstimatedDiameterUi
 import dev.stukalo.common.model.MissDistanceUi
 import dev.stukalo.common.model.RelativeVelocityUi
 import dev.stukalo.platform.BaseFragment
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -23,57 +29,94 @@ const val CERES_DIAMETER = 939.4
 
 class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details) {
     private val viewBinding: FragmentAsteroidDetailsBinding by viewBinding(FragmentAsteroidDetailsBinding::bind)
+    private val viewModel: AsteroidDetailsViewModel by activityViewModels()
     private var jobOnSizeLayout: ViewTreeObserver.OnGlobalLayoutListener? = null
     private var jobOnDistanceLayout: ViewTreeObserver.OnGlobalLayoutListener? = null
     private var sizeComparisonInitialized: Boolean = false
 
     override fun configureUi() {
         super.configureUi()
+        collectSharedFlows()
         val asteroidUiJson = arguments?.getString("asteroid_ui_json")
         asteroidUiJson?.let {
             AsteroidAdapter.fromJson(asteroidUiJson)?.apply {
-                with(viewBinding) {
-                    rgComparison.check(R.id.rb_distance)
-                    setupDistanceComparison(closeApproachData?.missDistance?.astronomical?.toDouble() ?: 0.0)
+                lifecycleScope.launch {
+                    val isAsteroidInFavorite = viewModel.isAsteroidInFavorite(id)
+                    with(viewBinding) {
+                        rgComparison.check(R.id.rb_distance)
+                        setupDistanceComparison(closeApproachData?.missDistance?.astronomical?.toDouble() ?: 0.0)
 
-                    tvName.text = name
-                    ibLink.setOnClickListener {
-                        processExternalLink(nasaJplUrl)
-                    }
-                    tvIdValue.text = id
-                    tvMagnitudeValue.text = absoluteMagnitudeH.toString()
-                    tvPotentiallyHazardousValue.text = isHazardous(isPotentiallyHazardousAsteroid)
-                    tvCloseApproachDateValue.text = getDatetime(closeApproachData?.epochDateCloseApproach)
-                    tvOrbitingBodyValue.text = closeApproachData?.orbitingBody
-                    tvIsSentryObjectValue.text = isSentryObject(isSentryObject)
+                        tvName.text = name
+                        ibLink.setOnClickListener {
+                            processExternalLink(nasaJplUrl)
+                        }
+                        tvIdValue.text = id
+                        tvMagnitudeValue.text = absoluteMagnitudeH.toString()
+                        tvPotentiallyHazardousValue.text = isHazardous(isPotentiallyHazardousAsteroid)
+                        tvCloseApproachDateValue.text = getDatetime(closeApproachData?.epochDateCloseApproach)
+                        tvOrbitingBodyValue.text = closeApproachData?.orbitingBody
+                        tvIsSentryObjectValue.text = isSentryObject(isSentryObject)
 
-                    setupRelativeVelocityField(closeApproachData?.relativeVelocity)
-                    setupMissDistanceField(closeApproachData?.missDistance)
-                    setupEstimatedDiameterField(estimatedDiameter)
+                        setupRelativeVelocityField(closeApproachData?.relativeVelocity)
+                        setupMissDistanceField(closeApproachData?.missDistance)
+                        setupEstimatedDiameterField(estimatedDiameter)
 
-                    ibBack.setOnClickListener {
-                        findNavController().popBackStack()
-                    }
-
-                    ibFavorite.setOnClickListener {
-                        ibFavorite.setColorFilter(ContextCompat.getColor(requireContext(), dev.stukalo.ui.R.color.orange_900))
-                    }
-
-                    rgComparison.setOnCheckedChangeListener { _, checkedId ->
-                        when (checkedId) {
-                            R.id.rb_distance -> {
-                                svDistanceComparison.isVisible = true
-                                zlSizeComparison.isVisible = false
+                        if (isAsteroidInFavorite) {
+                            ibFavorite.setColorFilter(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    dev.stukalo.ui.R.color.orange_900),
+                            )
+                        } else {
+                            ibFavorite.setOnClickListener {
+                                viewModel.addToFavorite(this@apply)
                             }
-                            R.id.rb_size -> {
-                                svDistanceComparison.isVisible = false
-                                zlSizeComparison.isVisible = true
-                                if (!sizeComparisonInitialized) {
-                                    setupSizeComparison(estimatedDiameter)
-                                    sizeComparisonInitialized = true
+                        }
+
+                        ibBack.setOnClickListener {
+                            findNavController().popBackStack()
+                        }
+
+                        rgComparison.setOnCheckedChangeListener { _, checkedId ->
+                            when (checkedId) {
+                                R.id.rb_distance -> {
+                                    svDistanceComparison.isVisible = true
+                                    zlSizeComparison.isVisible = false
+                                }
+                                R.id.rb_size -> {
+                                    svDistanceComparison.isVisible = false
+                                    zlSizeComparison.isVisible = true
+                                    if (!sizeComparisonInitialized) {
+                                        setupSizeComparison(estimatedDiameter)
+                                        sizeComparisonInitialized = true
+                                    }
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun collectSharedFlows() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.addStatusSharedFlow.collectLatest { name ->
+                    if (name != null) {
+                        viewBinding.ibFavorite.setColorFilter(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                dev.stukalo.ui.R.color.orange_900),
+                        )
+                        operationSucceedSnackBar(
+                            String.format(
+                                getString(R.string.asteroid_added),
+                                name,
+                            )
+                        )
+                    } else {
+                        operationFailedSnackBar(getString(R.string.asteroid_not_added))
                     }
                 }
             }
