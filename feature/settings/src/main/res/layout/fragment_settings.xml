@@ -1,17 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_relative_velocity"
+        style="@style/TextBold.Size12.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/settings_relative_velocity"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_relative_velocity_units"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_relative_velocity_units"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinner_relative_velocity_units" />
+
+    <Spinner
+        android:id="@+id/spinner_relative_velocity_units"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="218dp"
-        android:text="Settings"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_miss_distance"
+        style="@style/TextBold.Size12.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/settings_miss_distance"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_miss_distance_units"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_miss_distance_units"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinner_miss_distance_units" />
+
+    <Spinner
+        android:id="@+id/spinner_miss_distance_units"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_relative_velocity_units" />
+
+    <TextView
+        android:id="@+id/tv_estimated_diameter"
+        style="@style/TextBold.Size12.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/settings_estimated_diameter"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_estimated_diameter_units"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_estimated_diameter_units"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinner_estimated_diameter_units" />
+
+    <Spinner
+        android:id="@+id/spinner_estimated_diameter_units"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_miss_distance_units" />
+
+    <TextView
+        android:id="@+id/tv_synchronization_time"
+        style="@style/TextBold.Size12.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/settings_synchronization_time"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_synchronization_time"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_synchronization_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinner_synchronization_time" />
+
+    <Spinner
+        android:id="@+id/spinner_synchronization_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_estimated_diameter_units" />
+
+    <TextView
+        android:id="@+id/tv_minimum_interval"
+        style="@style/TextBold.Size12.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/settings_minimum_interval"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_minimum_interval"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_minimum_interval"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinner_minimum_interval" />
+
+    <Spinner
+        android:id="@+id/spinner_minimum_interval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_synchronization_time" />
+
+    <Button
+        android:id="@+id/btn_apply"
+        style="@style/TextMedium.Size16.White"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/primary"
+        android:text="@string/settings_apply"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

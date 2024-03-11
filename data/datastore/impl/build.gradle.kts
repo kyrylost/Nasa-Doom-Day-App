@@ -1,10 +1,11 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id(libs.plugins.ksp.get().pluginId)
 }
 
 android {
-    namespace = "dev.stukalo.datastore"
+    namespace = "dev.stukalo.impl"
     compileSdk = ConfigData.COMPILE_SDK
 
     defaultConfig {
@@ -21,5 +22,10 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation(libs.hilt.android)
+    ksp(libs.android.hilt.compiler)
+    ksp(libs.hilt.compiler)
+
+    implementation(libs.datastore.preferences)
+    implementation(project(":data:datastore"))
 }

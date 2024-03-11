@@ -6,20 +6,21 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.stukalo.asteroiddetails.util.mapToAsteroidRepo
 import dev.stukalo.common.model.AsteroidUi
 import dev.stukalo.database.repo.FavoriteAsteroidsRepository
+import dev.stukalo.datastore.PreferencesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.coroutines.resume
 
 @HiltViewModel
 class AsteroidDetailsViewModel
     @Inject
     constructor(
         private val favoriteAsteroidsRepository: FavoriteAsteroidsRepository,
+        private val datastore: PreferencesManager,
     ) : ViewModel() {
         private val _addStatusSharedFlow = MutableSharedFlow<String?>()
         val addStatusSharedFlow = _addStatusSharedFlow.asSharedFlow()
@@ -41,24 +42,35 @@ class AsteroidDetailsViewModel
             }
         }
 
-        suspend fun isAsteroidInFavorite(id: String?): Boolean {
-            return withContext(Dispatchers.IO) {
-                suspendCancellableCoroutine { continuation ->
-                    val asteroid = favoriteAsteroidsRepository.getAsteroidById(id)
-                    if (asteroid != null) {
-                        continuation.resume(true)
-                    } else {
-                        continuation.resume(false)
-                    }
-                }
+        suspend fun isAsteroidInFavorite(id: String?): Boolean =
+            withContext(Dispatchers.IO) {
+                val asteroid = favoriteAsteroidsRepository.getAsteroidById(id)
+                asteroid != null
             }
-        }
 
         fun updateIsShownField(id: String?) {
             viewModelScope.launch(Dispatchers.IO) {
                 id?.let {
                     favoriteAsteroidsRepository.updateIsShownField(id, true)
                 }
+            }
+        }
+
+        suspend fun getSelectedVelocityUnit(): String {
+            return withContext(Dispatchers.IO) {
+                datastore.selectedVelocityUnit().first()
+            }
+        }
+
+        suspend fun getSelectedDistanceUnit(): String {
+            return withContext(Dispatchers.IO) {
+                datastore.selectedDistanceUnit().first()
+            }
+        }
+
+        suspend fun getSelectedDiameterUnit(): String {
+            return withContext(Dispatchers.IO) {
+                datastore.selectedDiameterUnit().first()
             }
         }
     }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_relative_velocity">Relative velocity</string>
+    <string name="settings_miss_distance">Miss distance</string>
+    <string name="settings_estimated_diameter">Estimated diameter</string>
+    <string name="settings_synchronization_time">Synchronization time</string>
+    <string name="settings_minimum_interval">Minimum interval</string>
+    <string name="settings_apply">Apply</string>
+    <string name="preferences_saved">New preferences saved</string>
+
+    <string-array name="velocity">
+        <item>km/sec</item>
+        <item>km/h</item>
+        <item>mph</item>
+    </string-array>
+    <string-array name="distance">
+        <item>au</item>
+        <item>lu</item>
+        <item>km</item>
+        <item>mi</item>
+    </string-array>
+    <string-array name="diameter">
+        <item>km</item>
+        <item>m</item>
+        <item>mi</item>
+        <item>ft</item>
+    </string-array>
+    <string-array name="synchronization">
+        <item>30M</item>
+        <item>1H</item>
+        <item>2H</item>
+        <item>6H</item>
+    </string-array>
+    <string-array name="interval">
+        <item>6H</item>
+        <item>12H</item>
+        <item>24H</item>
+        <item>48H</item>
+    </string-array>
+</resources>

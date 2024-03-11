@@ -5,6 +5,7 @@ import android.net.Uri
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.OneTimeWorkRequest
@@ -17,6 +18,9 @@ import dev.stukalo.main.databinding.ViewSnackbarBinding
 import dev.stukalo.navigation.NavigationDirection
 import dev.stukalo.platform.BaseActivity
 import dev.stukalo.worker.CheckForApproachingAsteroidsWorker
+import dev.stukalo.worker.WorkerProvider
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ActivityHost : BaseActivity(R.layout.activity_host) {
@@ -25,6 +29,8 @@ class ActivityHost : BaseActivity(R.layout.activity_host) {
     private var snackbarBinding_: ViewSnackbarBinding? = null
     private val snackbarBinding get() = snackbarBinding_!!
 
+    @Inject lateinit var workerProvider: WorkerProvider
+
     override fun configureUi() {
         (supportFragmentManager.findFragmentById(viewBinding.fcvNavHost.id) as? NavHostFragment)
             ?.let { navHostFragment ->
@@ -32,18 +38,22 @@ class ActivityHost : BaseActivity(R.layout.activity_host) {
                     navigator.navController = navController
                 }
             }
+        initializeWorker()
+    }
 
+    private fun initializeWorker() {
         val workRequest =
             OneTimeWorkRequest.Builder(CheckForApproachingAsteroidsWorker::class.java)
                 .build()
-
         WorkManager.getInstance(this).enqueue(workRequest) // remove on release
 
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-            "CheckForApproachingAsteroidsWork",
-            ExistingPeriodicWorkPolicy.UPDATE,
-            CheckForApproachingAsteroidsWorker.createPeriodicRequest(),
-        )
+        lifecycleScope.launch {
+            WorkManager.getInstance(this@ActivityHost).enqueueUniquePeriodicWork(
+                "CheckForApproachingAsteroidsWork",
+                ExistingPeriodicWorkPolicy.UPDATE,
+                workerProvider.createPeriodicRequest(),
+            )
+        }
     }
 
     override fun navigateTo(

@@ -72,6 +72,8 @@ dependencies {
     implementation(project(":data:repository:network:impl"))
     implementation(project(":data:repository:database"))
     implementation(project(":data:repository:database:impl"))
+    implementation(project(":data:datastore"))
+    implementation(project(":data:datastore:impl"))
 
     implementation(project(":data:worker"))
 }

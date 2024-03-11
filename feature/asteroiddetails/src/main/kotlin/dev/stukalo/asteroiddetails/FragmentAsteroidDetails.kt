@@ -17,6 +17,7 @@ import dev.stukalo.asteroiddetails.util.AsteroidAdapter
 import dev.stukalo.common.model.EstimatedDiameterUi
 import dev.stukalo.common.model.MissDistanceUi
 import dev.stukalo.common.model.RelativeVelocityUi
+import dev.stukalo.datastore.Constants
 import dev.stukalo.platform.BaseFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -172,52 +173,103 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
     }
 
     private fun setupRelativeVelocityField(relativeVelocityUi: RelativeVelocityUi?) {
-        with(viewBinding) {
-            tvRelativeVelocity.text =
-                String.format(
-                    getString(R.string.details_relative_velocity),
-                    getString(R.string.km_per_sec),
-                )
-            tvRelativeVelocityValue.text =
-                String.format(
-                    getString(R.string.round_to_two),
-                    relativeVelocityUi?.kilometersPerHour?.toDouble(),
-                )
+        lifecycleScope.launch {
+            val selectedVelocityUnit = viewModel.getSelectedVelocityUnit()
+            with(viewBinding) {
+                tvRelativeVelocity.text =
+                    String.format(
+                        getString(R.string.details_relative_velocity),
+                        selectedVelocityUnit,
+                    )
+
+                tvRelativeVelocityValue.text =
+                    String.format(
+                        getString(R.string.round_to_two),
+                        when (selectedVelocityUnit) {
+                            Constants.Velocity.KILOMETERS_PER_SECOND.value -> {
+                                relativeVelocityUi?.kilometersPerSecond?.toDouble()
+                            }
+                            Constants.Velocity.KILOMETERS_PER_HOUR.value -> {
+                                relativeVelocityUi?.kilometersPerHour?.toDouble()
+                            }
+                            Constants.Velocity.MILES_PER_HOUR.value -> {
+                                relativeVelocityUi?.milesPerHour?.toDouble()
+                            }
+                            else -> {}
+                        },
+                    )
+            }
         }
     }
 
     private fun setupMissDistanceField(missDistanceUi: MissDistanceUi?) {
-        with(viewBinding) {
-            tvMissDistance.text =
-                String.format(
-                    getString(R.string.details_miss_distance),
-                    getString(R.string.kilometer_distance),
-                )
-            tvMissDistanceValue.text =
-                String.format(
-                    getString(R.string.round_to_two),
-                    missDistanceUi?.kilometers?.toDouble(),
-                )
+        lifecycleScope.launch {
+            val selectedDistanceUnit = viewModel.getSelectedDistanceUnit()
+            with(viewBinding) {
+                tvMissDistance.text =
+                    String.format(
+                        getString(R.string.details_miss_distance),
+                        selectedDistanceUnit,
+                    )
+
+                tvMissDistanceValue.text =
+                    String.format(
+                        getString(R.string.round_to_two),
+                        when (selectedDistanceUnit) {
+                            Constants.Distance.ASTRONOMICAL.value -> {
+                                missDistanceUi?.astronomical?.toDouble()
+                            }
+                            Constants.Distance.LUNAR.value -> {
+                                missDistanceUi?.lunar?.toDouble()
+                            }
+                            Constants.Distance.KILOMETERS.value -> {
+                                missDistanceUi?.kilometers?.toDouble()
+                            }
+                            Constants.Distance.MILES.value -> {
+                                missDistanceUi?.miles?.toDouble()
+                            }
+                            else -> {}
+                        },
+                    )
+            }
         }
     }
 
     private fun setupEstimatedDiameterField(estimatedDiameterUi: EstimatedDiameterUi?) {
-        with(viewBinding) {
-            tvEstimatedDiameter.text =
-                String.format(
-                    getString(R.string.details_estimated_diameter),
-                    getString(R.string.kilometer_distance),
-                )
-            tvMinDiameterValue.text =
-                String.format(
-                    getString(dev.stukalo.ui.R.string.estimated_diameter_value),
-                    estimatedDiameterUi?.kilometers?.estimatedDiameterMin,
-                )
-            tvMaxDiameterValue.text =
-                String.format(
-                    getString(dev.stukalo.ui.R.string.estimated_diameter_value),
-                    estimatedDiameterUi?.kilometers?.estimatedDiameterMax,
-                )
+        lifecycleScope.launch {
+            val selectedDiameterUnit = viewModel.getSelectedDiameterUnit()
+            with(viewBinding) {
+                tvEstimatedDiameter.text =
+                    String.format(
+                        getString(R.string.details_estimated_diameter),
+                        selectedDiameterUnit,
+                    )
+
+                var minDiameter: Double? = null
+                var maxDiameter: Double? = null
+                when (selectedDiameterUnit) {
+                    Constants.Diameter.KILOMETERS.value -> {
+                        minDiameter = estimatedDiameterUi?.kilometers?.estimatedDiameterMin
+                        maxDiameter = estimatedDiameterUi?.kilometers?.estimatedDiameterMax
+                    }
+                    Constants.Diameter.METERS.value -> {
+                        minDiameter = estimatedDiameterUi?.meters?.estimatedDiameterMin
+                        maxDiameter = estimatedDiameterUi?.meters?.estimatedDiameterMax
+                    }
+                    Constants.Diameter.MILES.value -> {
+                        minDiameter = estimatedDiameterUi?.miles?.estimatedDiameterMin
+                        maxDiameter = estimatedDiameterUi?.miles?.estimatedDiameterMax
+                    }
+                    Constants.Diameter.FEET.value -> {
+                        minDiameter = estimatedDiameterUi?.feet?.estimatedDiameterMin
+                        maxDiameter = estimatedDiameterUi?.feet?.estimatedDiameterMax
+                    }
+                }
+
+                val diameterFormat = getString(dev.stukalo.ui.R.string.estimated_diameter_value)
+                tvMinDiameterValue.text = String.format(diameterFormat, minDiameter)
+                tvMaxDiameterValue.text = String.format(diameterFormat, maxDiameter)
+            }
         }
     }
 

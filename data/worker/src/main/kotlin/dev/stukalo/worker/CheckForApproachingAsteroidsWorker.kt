@@ -14,13 +14,13 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
-import androidx.work.PeriodicWorkRequest
-import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import dev.stukalo.common.utils.AsteroidAdapter
 import dev.stukalo.database.repo.FavoriteAsteroidsRepository
+import dev.stukalo.datastore.Constants
+import dev.stukalo.datastore.PreferencesManager
 import dev.stukalo.mapper.mapToAsteroidUi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -28,7 +28,6 @@ import kotlinx.coroutines.withContext
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.DurationUnit
 
@@ -41,6 +40,7 @@ class CheckForApproachingAsteroidsWorker
         @Assisted appContext: Context,
         @Assisted params: WorkerParameters,
         private val repository: FavoriteAsteroidsRepository,
+        private val datastore: PreferencesManager,
     ) : CoroutineWorker(appContext, params) {
         private val notificationManager: NotificationManager =
             applicationContext.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
@@ -62,9 +62,21 @@ class CheckForApproachingAsteroidsWorker
                         val currentTimeSeconds = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
 
                         val timeDifferenceSeconds = futureTimeSeconds - currentTimeSeconds
-                        val twentyFourHoursInSeconds = 24.hours.toLong(DurationUnit.SECONDS)
 
-                        val isWithin24Hours = timeDifferenceSeconds in 1..<twentyFourHoursInSeconds
+                        val minimumInterval =
+                            when (datastore.selectedMinimumInterval().first()) {
+                                Constants.MinimumInterval.H6.value -> 6
+                                Constants.MinimumInterval.H12.value -> 12
+                                Constants.MinimumInterval.H24.value -> 24
+                                Constants.MinimumInterval.H48.value -> 48
+                                else -> {
+                                    24
+                                }
+                            }
+
+                        val minimumIntervalInSeconds = minimumInterval.hours.toLong(DurationUnit.SECONDS)
+
+                        val isWithin24Hours = timeDifferenceSeconds in 1..<minimumIntervalInSeconds
 
                         if (isWithin24Hours && !it.isShownToUser) {
                             val channelId = "asteroid_notification"
@@ -87,7 +99,6 @@ class CheckForApproachingAsteroidsWorker
                             val intent = Intent()
                             intent.action = Intent.ACTION_VIEW
                             intent.data = Uri.parse(deeplink)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
                             val notificationBuilder =
@@ -116,12 +127,4 @@ class CheckForApproachingAsteroidsWorker
                     Result.retry()
                 }
             }
-
-        companion object {
-            fun createPeriodicRequest(): PeriodicWorkRequest {
-                return PeriodicWorkRequestBuilder<CheckForApproachingAsteroidsWorker>(1, TimeUnit.HOURS)
-                    .addTag("CheckForApproachingAsteroidsWork")
-                    .build()
-            }
-        }
     }

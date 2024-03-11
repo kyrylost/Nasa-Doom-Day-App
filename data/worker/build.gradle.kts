@@ -32,4 +32,5 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":data:repository"))
     implementation(project(":data:repository:database"))
+    implementation(project(":data:datastore"))
 }
