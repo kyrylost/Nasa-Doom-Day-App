@@ -2,6 +2,8 @@
 agp = "8.1.2"
 datastore = "1.0.0"
 gradle = "8.1.2"
+google-services = "4.4.1"
+crashlytics = "2.9.9"
 javapoet = "1.13.0"
 org-jetbrains-kotlin-android = "1.9.22"
 ksp = "1.9.22-1.0.17"
@@ -17,6 +19,7 @@ retrofit = "2.9.0"
 room = "2.6.1"
 hilt-version = "2.50"
 hilt-compiler-version = "1.2.0"
+firebase-bom = "32.7.4"
 
 work-runtime-version = "2.9.0"
 
@@ -64,6 +67,10 @@ datastore-preferences = { group = "androidx.datastore", name = "datastore-prefer
 
 viewbindingpropertydelegate-noreflection = { group = "com.github.kirich1409", name = "viewbindingpropertydelegate-noreflection", version.ref = "viewbindingpropertydelegate-version" }
 
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics"}
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics"}
+
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
@@ -79,6 +86,9 @@ google-hilt-android-plugin = { id = "com.google.dagger.hilt.android", version.re
 androidx-navigation-safeargs = {id = "androidx.navigation.safeargs", version.ref = "nav-version"}
 
 ksp = {id = "com.google.devtools.ksp", version.ref = "ksp"}
+
+google-services = {id = "com.google.gms.google-services", version.ref = "google-services"}
+crashlytics = {id = "com.google.firebase.crashlytics", version.ref = "crashlytics"}
 
 [bundles]
 navigation = ["navigation-fragment-ktx", "navigation-ui-ktx"]

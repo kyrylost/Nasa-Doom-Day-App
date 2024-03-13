@@ -12,4 +12,6 @@ plugins {
     id(libs.plugins.com.android.library.get().pluginId) apply false
     id(libs.plugins.google.hilt.android.plugin.get().pluginId) version libs.versions.hilt.version.get() apply false
     id(libs.plugins.ksp.get().pluginId) version libs.versions.ksp.get() apply false
+    id(libs.plugins.google.services.get().pluginId) version libs.versions.google.services.get() apply false
+    id(libs.plugins.crashlytics.get().pluginId) version libs.versions.crashlytics.get() apply false
 }

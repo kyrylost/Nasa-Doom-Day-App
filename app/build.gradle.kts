@@ -4,6 +4,8 @@ plugins {
     id(libs.plugins.hilt.android.plugin.get().pluginId)
     id(libs.plugins.google.hilt.android.plugin.get().pluginId)
     id(libs.plugins.ksp.get().pluginId)
+    id(libs.plugins.google.services.get().pluginId)
+    id(libs.plugins.crashlytics.get().pluginId)
 }
 
 android {
@@ -48,6 +50,10 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     implementation(libs.work.runtime.ktx)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
 
     implementation(project(":feature:main"))
     implementation(project(":feature:init"))
