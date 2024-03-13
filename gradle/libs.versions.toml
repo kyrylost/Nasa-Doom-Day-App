@@ -24,6 +24,7 @@ splashscreen = "1.0.1"
 work-runtime-version = "2.9.0"
 annotation = "1.7.1"
 egloo = "0.6.1"
+coroutines = "1.6.4"
 
 viewbindingpropertydelegate-version = "1.5.9"
 
@@ -76,6 +77,8 @@ firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashly
 splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen"}
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation"}
 opengl-egloo = { group = "com.otaliastudios.opengl", name = "egloo", version.ref = "egloo"}
+
+kotlinx-coroutines = { group="org.jetbrains.kotlinx", name="kotlinx-coroutines-core", version.ref = "coroutines" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }

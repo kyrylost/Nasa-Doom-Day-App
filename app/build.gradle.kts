@@ -18,6 +18,10 @@ android {
         targetSdk = ConfigData.TARGET_SDK
         versionCode = 1
         versionName = "1.0"
+
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
     }
 
     buildTypes {
@@ -64,10 +68,10 @@ dependencies {
     implementation(project(":feature:asteroiddetails"))
     implementation(project(":feature:compare"))
 
-    implementation(project(":core:ui"))
-    implementation(project(":core:platform"))
-    implementation(project(":core:navigation"))
     implementation(project(":core:common"))
+    implementation(project(":core:navigation"))
+    implementation(project(":core:platform"))
+    implementation(project(":core:ui"))
 
     implementation(project(":data:network"))
     implementation(project(":data:network:impl"))

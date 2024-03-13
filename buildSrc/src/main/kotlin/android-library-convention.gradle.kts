@@ -1,6 +1,3 @@
-import org.gradle.accessors.dm.LibrariesForLibs
-val libs = the<LibrariesForLibs>()
-
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")

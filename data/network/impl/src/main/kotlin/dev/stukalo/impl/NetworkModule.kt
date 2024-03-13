@@ -1,12 +1,10 @@
 package dev.stukalo.impl
 
-import android.content.Context
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.stukalo.network.service.AsteroidsService
 import dev.stukalo.network.source.AsteroidsNetSource
@@ -48,11 +46,8 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(
-        @ApplicationContext appContext: Context,
-    ): OkHttpClient {
+    fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-//            .addInterceptor(ChuckerInterceptor(appContext))
             .addInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BASIC) }).build()
     }
 

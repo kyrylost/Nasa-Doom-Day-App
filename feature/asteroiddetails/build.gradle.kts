@@ -14,7 +14,6 @@ dependencies {
 
     implementation(libs.moshi.kotlin)
     implementation(libs.moshi.kotlin.codegen)
-//    implementation("com.otaliastudios:zoomlayout:1.9.0")
 
     implementation(project(":data:repository"))
     implementation(project(":data:repository:database"))
