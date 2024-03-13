@@ -20,8 +20,10 @@ room = "2.6.1"
 hilt-version = "2.50"
 hilt-compiler-version = "1.2.0"
 firebase-bom = "32.7.4"
-
+splashscreen = "1.0.1"
 work-runtime-version = "2.9.0"
+annotation = "1.7.1"
+egloo = "0.6.1"
 
 viewbindingpropertydelegate-version = "1.5.9"
 
@@ -70,6 +72,10 @@ viewbindingpropertydelegate-noreflection = { group = "com.github.kirich1409", na
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics"}
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics"}
+
+splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen"}
+annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation"}
+opengl-egloo = { group = "com.otaliastudios.opengl", name = "egloo", version.ref = "egloo"}
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }

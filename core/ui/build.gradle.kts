@@ -27,5 +27,7 @@ android {
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
-    implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation(libs.splashscreen)
+    api(libs.annotation)
+    api(libs.opengl.egloo)
 }

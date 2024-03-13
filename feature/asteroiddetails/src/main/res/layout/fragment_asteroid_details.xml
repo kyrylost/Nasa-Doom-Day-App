@@ -334,7 +334,7 @@
             android:textColor="@drawable/selector_radio_btn_txt_color"/>
     </RadioGroup>
 
-    <com.otaliastudios.zoom.ZoomLayout
+    <dev.stukalo.ui.zoomlayout.ZoomLayout
         android:id="@+id/zl_size_comparison"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -366,7 +366,7 @@
                 android:src="@drawable/ic_ceres" />
 
         </LinearLayout>
-    </com.otaliastudios.zoom.ZoomLayout>
+    </dev.stukalo.ui.zoomlayout.ZoomLayout>
 
     <HorizontalScrollView
         android:layout_width="0dp"
