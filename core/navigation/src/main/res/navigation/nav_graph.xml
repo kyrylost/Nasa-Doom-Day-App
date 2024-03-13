@@ -7,6 +7,7 @@
     <include app:graph="@navigation/init_nav_graph" />
     <include app:graph="@navigation/main_nav_graph" />
     <include app:graph="@navigation/asteroid_details_nav_graph" />
+    <include app:graph="@navigation/compare_asteroids_nav_graph" />
 
     <action
         android:id="@+id/action_global_main"
@@ -25,4 +26,11 @@
             app:argType="boolean" />
     </action>
 
+    <action
+        android:id="@+id/action_global_compare_asteroids"
+        app:destination="@id/compare_asteroids_nav_graph">
+        <argument
+            android:name="start_asteroid_id"
+            app:argType="string" />
+    </action>
 </navigation>

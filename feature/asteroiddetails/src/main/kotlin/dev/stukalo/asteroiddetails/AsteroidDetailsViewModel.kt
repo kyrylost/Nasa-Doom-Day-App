@@ -56,6 +56,12 @@ class AsteroidDetailsViewModel
             }
         }
 
+        suspend fun allowComparing(): Boolean {
+            return withContext(Dispatchers.IO) {
+                (favoriteAsteroidsRepository.getFavoriteAsteroids().first()?.count() ?: 0) >= 2
+            }
+        }
+
         suspend fun getSelectedVelocityUnit(): String {
             return withContext(Dispatchers.IO) {
                 datastore.selectedVelocityUnit().first()

@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
@@ -17,7 +16,6 @@ import dev.stukalo.main.databinding.ActivityHostBinding
 import dev.stukalo.main.databinding.ViewSnackbarBinding
 import dev.stukalo.navigation.NavigationDirection
 import dev.stukalo.platform.BaseActivity
-import dev.stukalo.worker.CheckForApproachingAsteroidsWorker
 import dev.stukalo.worker.WorkerProvider
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -42,11 +40,6 @@ class ActivityHost : BaseActivity(R.layout.activity_host) {
     }
 
     private fun initializeWorker() {
-        val workRequest =
-            OneTimeWorkRequest.Builder(CheckForApproachingAsteroidsWorker::class.java)
-                .build()
-        WorkManager.getInstance(this).enqueue(workRequest) // remove on release
-
         lifecycleScope.launch {
             WorkManager.getInstance(this@ActivityHost).enqueueUniquePeriodicWork(
                 "CheckForApproachingAsteroidsWork",
@@ -75,7 +68,7 @@ class ActivityHost : BaseActivity(R.layout.activity_host) {
         textColor: Int,
         cardBackgroundColor: Int,
     ) {
-        Snackbar.make(view, "", Snackbar.LENGTH_LONG).apply {
+        Snackbar.make(view, "", 7000).apply {
             SnackbarLayoutBuilder(this)
                 .setAnchorView(viewBinding.snackbarAnchorView)
                 .setMessage(message)

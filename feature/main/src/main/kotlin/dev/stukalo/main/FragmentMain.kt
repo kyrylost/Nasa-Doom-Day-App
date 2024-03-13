@@ -84,7 +84,7 @@ class FragmentMain : BaseFragment(R.layout.fragment_main) {
             graphIdToTagMap[graphId] = fragmentTag
 
             // Attach or detach nav host fragment depending on whether it's the selected item.
-            if(lastSelectedItemTag == null) {
+            if (lastSelectedItemTag == null) {
                 if (index == 0) {
                     selectedNavController = navHostFragment.navController
                     attachNavHostFragment(fragmentManager, navHostFragment, true)
@@ -99,7 +99,6 @@ class FragmentMain : BaseFragment(R.layout.fragment_main) {
                     detachNavHostFragment(fragmentManager, navHostFragment)
                 }
             }
-
         }
 
         // Now connect selecting an item with swapping Fragments
@@ -122,7 +121,7 @@ class FragmentMain : BaseFragment(R.layout.fragment_main) {
                     )
                     val selectedFragment =
                         fragmentManager.findFragmentByTag(newlySelectedItemTag)
-                                as NavHostFragment
+                            as NavHostFragment
 
                     // Exclude the first fragment tag because it's always in the back stack.
                     if (firstFragmentTag != newlySelectedItemTag) {
@@ -181,7 +180,7 @@ class FragmentMain : BaseFragment(R.layout.fragment_main) {
             val newlySelectedItemTag = graphIdToTagMap[item.itemId]
             val selectedFragment =
                 fragmentManager.findFragmentByTag(newlySelectedItemTag)
-                        as NavHostFragment
+                    as NavHostFragment
             val navController = selectedFragment.navController
             // Pop the back stack to the start destination of the current navController graph
             navController.popBackStack(

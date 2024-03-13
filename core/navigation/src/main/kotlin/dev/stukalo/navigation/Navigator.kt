@@ -20,6 +20,7 @@ class Navigator {
                 when (navigationDirection) {
                     is NavigationDirection.Main -> navigateToMain()
                     is NavigationDirection.AsteroidDetails -> navigateToAsteroidDetails(arg)
+                    is NavigationDirection.CompareAsteroids -> navigateToCompareAsteroids(arg)
                     else -> {
                         // stub
                     }
@@ -44,5 +45,9 @@ class Navigator {
         navController.navigate(
             NavGraphDirections.actionGlobalAsteroidDetails(asteroidUiJson, navigateFromPush),
         )
+    }
+
+    private fun navigateToCompareAsteroids(startAsteroidId: String) {
+        navController.navigate(NavGraphDirections.actionGlobalCompareAsteroids(startAsteroidId))
     }
 }

@@ -273,6 +273,17 @@
             app:layout_constraintTop_toTopOf="@id/tv_max_diameter"
             tools:text="0.0284" />
 
+        <ImageButton
+            android:id="@+id/ib_compare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/ic_compare"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/ib_favorite"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView

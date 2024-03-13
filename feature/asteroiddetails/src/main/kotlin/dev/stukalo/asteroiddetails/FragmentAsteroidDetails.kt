@@ -14,10 +14,12 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.stukalo.asteroiddetails.databinding.FragmentAsteroidDetailsBinding
 import dev.stukalo.asteroiddetails.util.AsteroidAdapter
+import dev.stukalo.common.Constants.DATE_TIME_FORMATTER
 import dev.stukalo.common.model.EstimatedDiameterUi
 import dev.stukalo.common.model.MissDistanceUi
 import dev.stukalo.common.model.RelativeVelocityUi
 import dev.stukalo.datastore.Constants
+import dev.stukalo.navigation.NavigationDirection
 import dev.stukalo.platform.BaseFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -27,7 +29,6 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 const val CERES_DIAMETER = 939.4
-const val DATE_TIME_FORMATTER = "yyyy MMM dd HH:mm"
 
 class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details) {
     private val viewBinding: FragmentAsteroidDetailsBinding by viewBinding(FragmentAsteroidDetailsBinding::bind)
@@ -79,9 +80,11 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
                                     dev.stukalo.ui.R.color.orange_900,
                                 ),
                             )
+                            enableCompareButton(id)
                         } else {
                             ibFavorite.setOnClickListener {
                                 viewModel.addToFavorite(this@apply)
+                                enableCompareButton(id)
                             }
                         }
 
@@ -350,6 +353,24 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
                     jobOnDistanceLayout = null
                 }
             svDistanceComparison.viewTreeObserver.addOnGlobalLayoutListener(jobOnDistanceLayout)
+        }
+    }
+
+    private fun enableCompareButton(id: String?) {
+        lifecycleScope.launch {
+            val isComparingAllowed = viewModel.allowComparing()
+            with(viewBinding.ibCompare) {
+                isVisible = true
+                setOnClickListener {
+                    if (isComparingAllowed) {
+                        id?.let {
+                            navigateTo(NavigationDirection.CompareAsteroids, arg = it)
+                        }
+                    } else {
+                        operationFailedSnackBar(getString(R.string.cannot_compare))
+                    }
+                }
+            }
         }
     }
 }

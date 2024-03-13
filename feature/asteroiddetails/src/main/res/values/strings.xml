@@ -26,4 +26,5 @@
     <string name="distance">Distance</string>
     <string name="asteroid_added">Asteroid %s successfully added to favorite</string>
     <string name="asteroid_not_added">Cannot add asteroid to favorite</string>
+    <string name="cannot_compare">The asteroid cannot be compared to anything at the moment.</string>
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="compare_name">Name</string>
+    <string name="compare_potentially_hazardous">Potentially hazardous</string>
+    <string name="compare_close_approach_date">Close approach date</string>
+    <string name="compare_absolute_magnitude">Absolute magnitude</string>
+    <string name="compare_relative_velocity">Relative velocity(%s)</string>
+    <string name="compare_miss_distance">Miss distance(%s)</string>
+    <string name="compare_estimated_diameter">Estimated diameter(%s)</string>
+    <string name="round_to_two">%.2f</string>
+    <string name="compare_min">MIN</string>
+    <string name="compare_max">MAX</string>
+</resources>

@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager_comparison"
-        android:visibility="invisible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_two_asteroid_comparison"
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="32dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -35,10 +29,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:gravity="center">
                 <TextView
-                    android:id="@+id/tv_name_first"
+                    android:id="@+id/tv_name_prev"
                     style="@style/TextRegular.Size12.Primary"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -46,7 +39,16 @@
                     android:layout_height="wrap_content"
                     tools:text="2021 (C 2021)" />
                 <TextView
-                    android:id="@+id/tv_name_second"
+                    android:id="@+id/tv_name_curr"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    tools:text="2021 (C 2021)" />
+                <TextView
+                    android:id="@+id/tv_name_next"
                     style="@style/TextRegular.Size12.Primary"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -60,16 +62,15 @@
                 style="@style/TextBold.Size14.Primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/compare_potentially_hazardous" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:gravity="center">
                 <TextView
-                    android:id="@+id/tv_hazardous_first"
+                    android:id="@+id/tv_hazardous_prev"
                     style="@style/TextRegular.Size12.Primary"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -77,7 +78,16 @@
                     android:layout_height="wrap_content"
                     tools:text="Yes" />
                 <TextView
-                    android:id="@+id/tv_hazardous_second"
+                    android:id="@+id/tv_hazardous_curr"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    tools:text="No" />
+                <TextView
+                    android:id="@+id/tv_hazardous_next"
                     style="@style/TextRegular.Size12.Primary"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -91,16 +101,15 @@
                 style="@style/TextBold.Size14.Primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/compare_close_approach_date" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:gravity="center">
                 <TextView
-                    android:id="@+id/tv_date_first"
+                    android:id="@+id/tv_date_prev"
                     style="@style/TextRegular.Size12.Primary"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -108,7 +117,16 @@
                     android:layout_height="wrap_content"
                     tools:text="2024 mar. 13 17:31" />
                 <TextView
-                    android:id="@+id/tv_date_second"
+                    android:id="@+id/tv_date_curr"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    tools:text="2024 mar. 13 17:31" />
+                <TextView
+                    android:id="@+id/tv_date_next"
                     style="@style/TextRegular.Size12.Primary"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -122,16 +140,15 @@
                 style="@style/TextBold.Size14.Primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/compare_absolute_magnitude" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:gravity="center">
                 <TextView
-                    android:id="@+id/tv_magnitude_first"
+                    android:id="@+id/tv_magnitude_prev"
                     style="@style/TextRegular.Size12.Primary"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -140,7 +157,16 @@
                     tools:textColor="@color/red_900"
                     tools:text="19.0" />
                 <TextView
-                    android:id="@+id/tv_magnitude_second"
+                    android:id="@+id/tv_magnitude_curr"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    tools:text="20.0" />
+                <TextView
+                    android:id="@+id/tv_magnitude_next"
                     style="@style/TextRegular.Size12.Primary"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -155,16 +181,15 @@
                 style="@style/TextBold.Size14.Primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/compare_relative_velocity" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:gravity="center">
                 <TextView
-                    android:id="@+id/tv_velocity_first"
+                    android:id="@+id/tv_velocity_prev"
                     style="@style/TextRegular.Size12.Primary"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -173,7 +198,16 @@
                     tools:textColor="@color/red_900"
                     tools:text="19.0" />
                 <TextView
-                    android:id="@+id/tv_velocity_second"
+                    android:id="@+id/tv_velocity_curr"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    tools:text="20.0" />
+                <TextView
+                    android:id="@+id/tv_velocity_next"
                     style="@style/TextRegular.Size12.Primary"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -188,16 +222,15 @@
                 style="@style/TextBold.Size14.Primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/compare_miss_distance" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:gravity="center">
                 <TextView
-                    android:id="@+id/tv_distance_first"
+                    android:id="@+id/tv_distance_prev"
                     style="@style/TextRegular.Size12.Primary"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -206,7 +239,16 @@
                     tools:textColor="@color/red_900"
                     tools:text="19.0" />
                 <TextView
-                    android:id="@+id/tv_distance_second"
+                    android:id="@+id/tv_distance_curr"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    tools:text="20.0" />
+                <TextView
+                    android:id="@+id/tv_distance_next"
                     style="@style/TextRegular.Size12.Primary"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -221,15 +263,13 @@
                 style="@style/TextBold.Size14.Primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/compare_estimated_diameter" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:baselineAligned="false">
+                android:gravity="center">
                 <LinearLayout
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -243,7 +283,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/compare_min" />
                     <TextView
-                        android:id="@+id/tv_diameter_min_first"
+                        android:id="@+id/tv_diameter_min_prev"
                         style="@style/TextRegular.Size12.Primary"
                         android:gravity="center"
                         android:layout_width="wrap_content"
@@ -258,12 +298,48 @@
                         android:layout_marginTop="4dp"
                         android:text="@string/compare_max" />
                     <TextView
-                        android:id="@+id/tv_diameter_max_first"
+                        android:id="@+id/tv_diameter_max_prev"
                         style="@style/TextRegular.Size12.Primary"
                         android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:textColor="@color/red_900"
+                        tools:text="19.0" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
+                        style="@style/TextMedium.Size12.Primary"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/compare_min" />
+                    <TextView
+                        android:id="@+id/tv_diameter_min_curr"
+                        style="@style/TextRegular.Size12.Primary"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="19.0" />
+                    <TextView
+                        style="@style/TextMedium.Size12.Primary"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/compare_max" />
+                    <TextView
+                        android:id="@+id/tv_diameter_max_curr"
+                        style="@style/TextRegular.Size12.Primary"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         tools:text="19.0" />
                 </LinearLayout>
 
@@ -280,7 +356,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/compare_min" />
                     <TextView
-                        android:id="@+id/tv_diameter_min_second"
+                        android:id="@+id/tv_diameter_min_next"
                         style="@style/TextRegular.Size12.Primary"
                         android:gravity="center"
                         android:layout_width="wrap_content"
@@ -295,7 +371,7 @@
                         android:layout_marginTop="4dp"
                         android:text="@string/compare_max" />
                     <TextView
-                        android:id="@+id/tv_diameter_max_second"
+                        android:id="@+id/tv_diameter_max_next"
                         style="@style/TextRegular.Size12.Primary"
                         android:gravity="center"
                         android:layout_width="wrap_content"
@@ -307,4 +383,5 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
 </LinearLayout>
