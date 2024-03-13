@@ -179,6 +179,7 @@ class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
                                 visibility = View.VISIBLE
                                 setOnClickListener {
                                     asteroidsWeekAdapter.refresh()
+                                    visibility = View.GONE
                                 }
                             }
                         }

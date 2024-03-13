@@ -293,8 +293,8 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
                         val layoutParamsCeres = ivCeres.layoutParams
                         val layoutParamsAsteroid = ivAsteroid.layoutParams
 
-                        if (asteroidSize < 100) {
-                            val extraScaleFactor = 100 / asteroidSize
+                        if (asteroidSize < 20) {
+                            val extraScaleFactor = 20 / asteroidSize
 
                             layoutParamsCeres.width = (ceresSize * extraScaleFactor).toInt()
                             layoutParamsCeres.height = (ceresSize * extraScaleFactor).toInt()
