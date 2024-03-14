@@ -222,4 +222,9 @@ class FragmentAsteroids : BaseFragment(R.layout.fragment_asteroids) {
     private fun datePickerDialog() {
         datePicker.show(parentFragmentManager, DATE_PICKER_TAG)
     }
+
+    override fun onDestroyView() {
+        showLoader(false)
+        super.onDestroyView()
+    }
 }

@@ -8,4 +8,6 @@ sealed class NavigationDirection {
     data object AsteroidDetails : NavigationDirection()
 
     data object CompareAsteroids : NavigationDirection()
+
+    data object Onboarding : NavigationDirection()
 }

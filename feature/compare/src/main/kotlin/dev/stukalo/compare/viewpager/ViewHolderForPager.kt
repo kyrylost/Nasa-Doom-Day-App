@@ -1,4 +1,4 @@
-package dev.stukalo.compare
+package dev.stukalo.compare.viewpager
 
 import android.content.Context
 import androidx.core.content.ContextCompat
@@ -8,6 +8,7 @@ import dev.stukalo.common.model.AsteroidUi
 import dev.stukalo.common.model.EstimatedDiameterUi
 import dev.stukalo.common.model.MissDistanceUi
 import dev.stukalo.common.model.RelativeVelocityUi
+import dev.stukalo.compare.R
 import dev.stukalo.compare.databinding.ItemViewPagerBinding
 import dev.stukalo.datastore.PreferencesManager
 import kotlinx.coroutines.CoroutineScope

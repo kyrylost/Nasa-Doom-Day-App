@@ -1,4 +1,4 @@
-package dev.stukalo.compare
+package dev.stukalo.compare.viewpager
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import dev.stukalo.common.model.AsteroidUi
 import dev.stukalo.compare.databinding.ItemViewPagerBinding
 import dev.stukalo.datastore.PreferencesManager
 
-class ViewPagerAdapter(
+class AsteroidsPagerAdapter(
     favoriteAsteroidsOriginal: List<AsteroidUi>,
     private val datastore: PreferencesManager,
 ) : RecyclerView.Adapter<ViewHolderForPager>() {

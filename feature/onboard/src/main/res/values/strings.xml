@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_start">Start</string>
+    <string name="visualize_size_and_distance">Visualize size and distance</string>
+    <string name="stay_informed">Stay informed about approaching asteroids</string>
+    <string name="compare_with_other_asteroids">Compare with other asteroids</string>
+    <string name="onboarding_first">You may compare asteroid size with size of Ceres.\nAlso you may check how far is asteroid in compare to distance between Earth and Sun.\n\nP.S. In most cases asteroid size is too small, so You\'ll need to zoom out to find Ceres</string>
+    <string name="onboarding_second">Add the asteroid to favorites, and you will receive notifications about its approach. You may also set the minimum time interval that the program will consider for an asteroid to travel to Earth before it is considered as approaching</string>
+    <string name="onboarding_third">You may compare the characteristics of asteroids that added to favorite</string>
+</resources>

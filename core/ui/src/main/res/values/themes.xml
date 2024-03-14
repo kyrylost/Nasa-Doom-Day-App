@@ -64,6 +64,10 @@
         <item name="android:textColor">@color/primary</item>
     </style>
 
+    <style name="TextRegular.Size12.LightGray">
+        <item name="android:textColor">@color/gray_50</item>
+    </style>
+
     <style name="TextRegular.Size14.Primary">
         <item name="android:textColor">@color/primary</item>
     </style>
@@ -100,8 +104,19 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="TextMedium.Size16.LightGray">
+        <item name="android:textColor">@color/gray_50</item>
+    </style>
+
+    <style name="TextMedium.Size16.PrimaryLight">
+        <item name="android:textColor">@color/primary_light</item>
+    </style>
+
     <style name="TextBold.Size16.Primary">
         <item name="android:textColor">@color/primary</item>
     </style>
 
+    <style name="TextBold.Size16.LightGray">
+        <item name="android:textColor">@color/gray_50</item>
+    </style>
 </resources>

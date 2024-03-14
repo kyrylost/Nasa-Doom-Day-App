@@ -20,6 +20,7 @@ import dev.stukalo.common.model.MissDistanceUi
 import dev.stukalo.common.model.RelativeVelocityUi
 import dev.stukalo.common.utils.AsteroidAdapter
 import dev.stukalo.compare.databinding.FragmentCompareAsteroidsBinding
+import dev.stukalo.compare.viewpager.AsteroidsPagerAdapter
 import dev.stukalo.datastore.Constants
 import dev.stukalo.datastore.PreferencesManager
 import dev.stukalo.navigation.NavigationDirection
@@ -63,8 +64,8 @@ class FragmentCompareAsteroids : BaseFragment(R.layout.fragment_compare_asteroid
                 viewModel.compareStateFlow.collect { favoriteAsteroids ->
                     if (favoriteAsteroids.count() >= 3) {
                         viewBinding.pagerComparison.apply {
-                            val viewPagerAdapter = ViewPagerAdapter(favoriteAsteroids, datastore)
-                            adapter = viewPagerAdapter
+                            val asteroidsPagerAdapter = AsteroidsPagerAdapter(favoriteAsteroids, datastore)
+                            adapter = asteroidsPagerAdapter
                             clipToPadding = false
                             offscreenPageLimit = 2
                             setPageTransformer { page, position ->
@@ -92,11 +93,13 @@ class FragmentCompareAsteroids : BaseFragment(R.layout.fragment_compare_asteroid
                                     },
                                 ) + 1
                                 postDelayed(500) {
-                                    isVisible = true
-                                    showLoader(false)
+                                    if (this@FragmentCompareAsteroids.isResumed) {
+                                        isVisible = true
+                                        showLoader(false)
+                                    }
                                 }
                             }
-                            viewPagerAdapter.onItemClick = {
+                            asteroidsPagerAdapter.onItemClick = {
                                 navigateTo(
                                     NavigationDirection.AsteroidDetails,
                                     arg = AsteroidAdapter.toJson(it),
@@ -398,6 +401,11 @@ class FragmentCompareAsteroids : BaseFragment(R.layout.fragment_compare_asteroid
             }
         }
         return getColor(requireContext(), dev.stukalo.ui.R.color.primary)
+    }
+
+    override fun onDestroyView() {
+        showLoader(false)
+        super.onDestroyView()
     }
 
     override fun onDestroy() {

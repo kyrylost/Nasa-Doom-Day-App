@@ -21,6 +21,7 @@ class Navigator {
                     is NavigationDirection.Main -> navigateToMain()
                     is NavigationDirection.AsteroidDetails -> navigateToAsteroidDetails(arg)
                     is NavigationDirection.CompareAsteroids -> navigateToCompareAsteroids(arg)
+                    is NavigationDirection.Onboarding -> navigateToOnboarding()
                     else -> {
                         // stub
                     }
@@ -32,6 +33,10 @@ class Navigator {
                 }
             }
         }
+    }
+
+    private fun navigateToOnboarding() {
+        navController.navigate(NavGraphDirections.actionGlobalOnboarding())
     }
 
     private fun navigateToMain() {
