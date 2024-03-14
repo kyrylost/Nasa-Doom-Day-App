@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="init_nav_graph" type="id" />
+    <item name="main_nav_graph" type="id" />
+    <item name="asteroids_nav_graph" type="id" />
+    <item name="favorite_asteroids_nav_graph" type="id" />
+    <item name="settings_nav_graph" type="id" />
+    <item name="compare_asteroids_nav_graph" type="id" />
+    <item name="onboarding_nav_graph" type="id" />
+</resources>

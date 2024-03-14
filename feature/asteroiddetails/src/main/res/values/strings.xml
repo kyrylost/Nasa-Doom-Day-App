@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="asteroid_id">Asteroid id:</string>
+    <string name="details_absolute_magnitude">Absolute magnitude:</string>
+    <string name="details_potentially_hazardous">Potentially hazardous:</string>
+    <string name="details_close_approach_date">Close approach date:</string>
+    <string name="details_relative_velocity">Relative velocity(%s):</string>
+    <string name="km_per_sec">km/sec</string>
+    <string name="km_per_hour">km/h</string>
+    <string name="miles_per_hour">mph</string>
+    <string name="astronomical_distance">au</string>
+    <string name="lunar_distance">ld</string>
+    <string name="kilometer_distance">km</string>
+    <string name="meter_distance">m</string>
+    <string name="miles_distance">mi</string>
+    <string name="feet_distance">ft</string>
+    <string name="round_to_two">%.2f</string>
+    <string name="details_miss_distance">Miss distance(%s):</string>
+    <string name="details_orbiting_body">Orbiting body:</string>
+    <string name="details_is_sentry_object">Is Sentry object:</string>
+    <string name="details_estimated_diameter">Estimated diameter(%s):</string>
+    <string name="details_comparison">Comparison</string>
+    <string name="details_min">Min:</string>
+    <string name="details_max">Max:</string>
+    <string name="size">Size</string>
+    <string name="distance">Distance</string>
+    <string name="asteroid_added">Asteroid %s successfully added to favorite</string>
+    <string name="asteroid_not_added">Cannot add asteroid to favorite</string>
+    <string name="cannot_compare">The asteroid cannot be compared to anything at the moment.</string>
+</resources>

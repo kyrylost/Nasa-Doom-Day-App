@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "798508015265",
+    "project_id": "nasa-doom-day-app",
+    "storage_bucket": "nasa-doom-day-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798508015265:android:9bca2e1a1fc16df9f75ae0",
+        "android_client_info": {
+          "package_name": "dev.stukalo.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3H6mx2MAgyeLhUiplBWyUjXXaM3wwlN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

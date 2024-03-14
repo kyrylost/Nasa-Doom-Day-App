@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/asteroids_nav_graph"
+        android:title="Asteroids"
+        android:icon="@drawable/ic_asteroid" />
+    <item android:id="@+id/favorite_asteroids_nav_graph"
+        android:title="Favorite Asteroids"
+        android:icon="@drawable/ic_star" />
+    <item android:id="@+id/settings_nav_graph"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings" />
+</menu>

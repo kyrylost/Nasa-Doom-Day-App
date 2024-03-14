@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager_comparison"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_two_asteroid_comparison"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/TextBold.Size14.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/compare_name" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_name_first"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="2021 (C 2021)" />
+                <TextView
+                    android:id="@+id/tv_name_second"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="2021 (C 2021)" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_potentially_hazardous"
+                style="@style/TextBold.Size14.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/compare_potentially_hazardous" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_hazardous_first"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="Yes" />
+                <TextView
+                    android:id="@+id/tv_hazardous_second"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="No" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_close_approach_date"
+                style="@style/TextBold.Size14.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/compare_close_approach_date" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_date_first"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="2024 mar. 13 17:31" />
+                <TextView
+                    android:id="@+id/tv_date_second"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="2024 mar. 13 17:31" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_absolute_magnitude"
+                style="@style/TextBold.Size14.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/compare_absolute_magnitude" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_magnitude_first"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:textColor="@color/red_900"
+                    tools:text="19.0" />
+                <TextView
+                    android:id="@+id/tv_magnitude_second"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:textColor="@color/green_900"
+                    tools:text="21.1" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_relative_velocity"
+                style="@style/TextBold.Size14.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/compare_relative_velocity" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_velocity_first"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:textColor="@color/red_900"
+                    tools:text="19.0" />
+                <TextView
+                    android:id="@+id/tv_velocity_second"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:textColor="@color/green_900"
+                    tools:text="21.1" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_miss_distance"
+                style="@style/TextBold.Size14.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/compare_miss_distance" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_distance_first"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:textColor="@color/red_900"
+                    tools:text="19.0" />
+                <TextView
+                    android:id="@+id/tv_distance_second"
+                    style="@style/TextRegular.Size12.Primary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:textColor="@color/green_900"
+                    tools:text="21.1" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_estimated_diameter"
+                style="@style/TextBold.Size14.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/compare_estimated_diameter" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:baselineAligned="false">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
+                        style="@style/TextMedium.Size12.Primary"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/compare_min" />
+                    <TextView
+                        android:id="@+id/tv_diameter_min_first"
+                        style="@style/TextRegular.Size12.Primary"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:textColor="@color/red_900"
+                        tools:text="19.0" />
+                    <TextView
+                        style="@style/TextMedium.Size12.Primary"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/compare_max" />
+                    <TextView
+                        android:id="@+id/tv_diameter_max_first"
+                        style="@style/TextRegular.Size12.Primary"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:textColor="@color/red_900"
+                        tools:text="19.0" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
+                        style="@style/TextMedium.Size12.Primary"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/compare_min" />
+                    <TextView
+                        android:id="@+id/tv_diameter_min_second"
+                        style="@style/TextRegular.Size12.Primary"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:textColor="@color/green_900"
+                        tools:text="19.0" />
+                    <TextView
+                        style="@style/TextMedium.Size12.Primary"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/compare_max" />
+                    <TextView
+                        android:id="@+id/tv_diameter_max_second"
+                        style="@style/TextRegular.Size12.Primary"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:textColor="@color/green_900"
+                        tools:text="19.0" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

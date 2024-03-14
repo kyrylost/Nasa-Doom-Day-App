@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/init_nav_graph">
+
+    <include app:graph="@navigation/init_nav_graph" />
+    <include app:graph="@navigation/main_nav_graph" />
+    <include app:graph="@navigation/asteroid_details_nav_graph" />
+    <include app:graph="@navigation/compare_asteroids_nav_graph" />
+    <include app:graph="@navigation/onboarding_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_main"
+        app:destination="@id/main_nav_graph"
+        app:popUpTo="@+id/nav_graph"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/action_global_onboarding"
+        app:destination="@id/onboarding_nav_graph"
+        app:popUpTo="@+id/nav_graph"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/action_global_asteroid_details"
+        app:destination="@id/asteroid_details_nav_graph">
+        <argument
+            android:name="asteroid_ui_json"
+            app:argType="string" />
+        <argument
+            android:name="navigate_from_push"
+            app:argType="boolean" />
+    </action>
+
+    <action
+        android:id="@+id/action_global_compare_asteroids"
+        app:destination="@id/compare_asteroids_nav_graph">
+        <argument
+            android:name="start_asteroid_id"
+            app:argType="string" />
+    </action>
+</navigation>
