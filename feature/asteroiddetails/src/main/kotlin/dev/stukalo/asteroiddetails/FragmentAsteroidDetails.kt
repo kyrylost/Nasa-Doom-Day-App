@@ -15,6 +15,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.stukalo.asteroiddetails.databinding.FragmentAsteroidDetailsBinding
 import dev.stukalo.asteroiddetails.util.AsteroidAdapter
 import dev.stukalo.common.Constants.DATE_TIME_FORMATTER
+import dev.stukalo.common.model.AsteroidUi
 import dev.stukalo.common.model.EstimatedDiameterUi
 import dev.stukalo.common.model.MissDistanceUi
 import dev.stukalo.common.model.RelativeVelocityUi
@@ -44,70 +45,61 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
 
         asteroidUiJson?.let {
             AsteroidAdapter.fromJson(asteroidUiJson)?.apply {
-                lifecycleScope.launch {
-                    val isAsteroidInFavorite =
-                        with(viewModel) {
-                            val navigateFromPush = arguments?.getBoolean("navigate_from_push")
-                            if (navigateFromPush == true) {
-                                updateIsShownField(id)
-                            }
-                            isAsteroidInFavorite(id)
-                        }
+                isOpenedViaPush(id)
+                setupView(this)
+            }
+        }
+    }
 
-                    with(viewBinding) {
-                        rgComparison.check(R.id.rb_distance)
-                        setupDistanceComparison(closeApproachData?.missDistance?.astronomical?.toDouble() ?: 0.0)
+    private fun isOpenedViaPush(id: String?) {
+        val navigateFromPush = arguments?.getBoolean("navigate_from_push")
+        if (navigateFromPush == true) {
+            viewModel.updateIsShownField(id)
+        }
+    }
 
-                        tvName.text = name
-                        ibLink.setOnClickListener {
-                            processExternalLink(nasaJplUrl)
-                        }
-                        tvIdValue.text = id
-                        tvMagnitudeValue.text = absoluteMagnitudeH.toString()
-                        tvPotentiallyHazardousValue.text = isHazardous(isPotentiallyHazardousAsteroid)
-                        tvCloseApproachDateValue.text = getDatetime(closeApproachData?.epochDateCloseApproach)
-                        tvOrbitingBodyValue.text = closeApproachData?.orbitingBody
-                        tvIsSentryObjectValue.text = isSentryObject(isSentryObject)
+    private fun setupView(asteroidUi: AsteroidUi) {
+        with(asteroidUi) {
+            isFavoriteAsteroid(this)
+            setupListeners(this)
 
-                        setupRelativeVelocityField(closeApproachData?.relativeVelocity)
-                        setupMissDistanceField(closeApproachData?.missDistance)
-                        setupEstimatedDiameterField(estimatedDiameter)
+            with(viewBinding) {
+                rgComparison.check(R.id.rb_distance)
+                setupDistanceComparison(closeApproachData?.missDistance?.astronomical?.toDouble() ?: 0.0)
 
-                        if (isAsteroidInFavorite) {
-                            ibFavorite.setColorFilter(
-                                ContextCompat.getColor(
-                                    requireContext(),
-                                    dev.stukalo.ui.R.color.orange_900,
-                                ),
-                            )
-                            enableCompareButton(id)
-                        } else {
-                            ibFavorite.setOnClickListener {
-                                viewModel.addToFavorite(this@apply)
-                                enableCompareButton(id)
-                            }
-                        }
+                ibLink.setOnClickListener {
+                    processExternalLink(nasaJplUrl)
+                }
 
-                        ibBack.setOnClickListener {
-                            findNavController().popBackStack()
-                        }
+                tvName.text = name
+                tvIdValue.text = id
+                tvMagnitudeValue.text = absoluteMagnitudeH.toString()
+                tvPotentiallyHazardousValue.text = isHazardous(isPotentiallyHazardousAsteroid)
+                tvCloseApproachDateValue.text = getDatetime(closeApproachData?.epochDateCloseApproach)
+                tvOrbitingBodyValue.text = closeApproachData?.orbitingBody
+                tvIsSentryObjectValue.text = isSentryObject(isSentryObject)
 
-                        rgComparison.setOnCheckedChangeListener { _, checkedId ->
-                            when (checkedId) {
-                                R.id.rb_distance -> {
-                                    svDistanceComparison.isVisible = true
-                                    zlSizeComparison.isVisible = false
-                                }
-                                R.id.rb_size -> {
-                                    svDistanceComparison.isVisible = false
-                                    zlSizeComparison.isVisible = true
-                                    if (!sizeComparisonInitialized) {
-                                        setupSizeComparison(estimatedDiameter)
-                                        sizeComparisonInitialized = true
-                                    }
-                                }
-                            }
-                        }
+                setupRelativeVelocityField(closeApproachData?.relativeVelocity)
+                setupMissDistanceField(closeApproachData?.missDistance)
+                setupEstimatedDiameterField(estimatedDiameter)
+            }
+        }
+    }
+
+    private fun isFavoriteAsteroid(asteroidUi: AsteroidUi) {
+        lifecycleScope.launch {
+            with(viewModel) {
+                with(viewBinding) {
+                    val isAsteroidInFavorite = isAsteroidInFavorite(asteroidUi.id)
+
+                    if (isAsteroidInFavorite) {
+                        ibFavorite.setColorFilter(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                dev.stukalo.ui.R.color.orange_900,
+                            ),
+                        )
+                        enableCompareButton(asteroidUi.id)
                     }
                 }
             }
@@ -354,6 +346,56 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
                 }
             svDistanceComparison.viewTreeObserver.addOnGlobalLayoutListener(jobOnDistanceLayout)
         }
+    }
+
+    private fun setupListeners(asteroidUi: AsteroidUi) {
+        with(viewBinding) {
+            ibBack.setOnClickListener {
+                findNavController().popBackStack()
+            }
+
+            ibFavorite.setOnClickListener {
+                lifecycleScope.launch {
+                    with(viewModel) {
+                        if (viewModel.isAsteroidInFavorite(asteroidUi.id)) {
+                            onDeleteFromFavorite(asteroidUi)
+                        } else {
+                            addToFavorite(asteroidUi)
+                            enableCompareButton(asteroidUi.id)
+                        }
+                    }
+                }
+            }
+
+            rgComparison.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.rb_distance -> {
+                        svDistanceComparison.isVisible = true
+                        zlSizeComparison.isVisible = false
+                    }
+                    R.id.rb_size -> {
+                        svDistanceComparison.isVisible = false
+                        zlSizeComparison.isVisible = true
+                        if (!sizeComparisonInitialized) {
+                            setupSizeComparison(asteroidUi.estimatedDiameter)
+                            sizeComparisonInitialized = true
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun onDeleteFromFavorite(asteroidUi: AsteroidUi) {
+        asteroidUi.id?.let {
+            viewModel.deleteAsteroidFromFavorite(it)
+        }
+        viewBinding.ibFavorite.colorFilter = null
+        disableCompareButton()
+    }
+
+    private fun disableCompareButton() {
+        viewBinding.ibCompare.isVisible = false
     }
 
     private fun enableCompareButton(id: String?) {

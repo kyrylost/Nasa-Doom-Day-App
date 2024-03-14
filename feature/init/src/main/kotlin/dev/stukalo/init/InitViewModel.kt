@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 @HiltViewModel
-class InitViewModel @Inject constructor(
-    private val datastore: PreferencesManager
-) : ViewModel() {
-
-    suspend fun isOnboardingShowed() = datastore.onboardingShowed().first()
-
-}
+class InitViewModel
+    @Inject
+    constructor(
+        private val datastore: PreferencesManager,
+    ) : ViewModel() {
+        suspend fun isOnboardingShowed() = datastore.onboardingShowed().first()
+    }

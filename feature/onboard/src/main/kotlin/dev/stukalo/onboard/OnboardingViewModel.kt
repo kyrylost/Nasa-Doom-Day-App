@@ -8,12 +8,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OnboardingViewModel @Inject constructor(
-    private val datastore: PreferencesManager
-): ViewModel() {
-
-    fun setOnboardingShowed() = viewModelScope.launch {
-        datastore.setOnboardingShowed(true)
+class OnboardingViewModel
+    @Inject
+    constructor(
+        private val datastore: PreferencesManager,
+    ) : ViewModel() {
+        fun setOnboardingShowed() =
+            viewModelScope.launch {
+                datastore.setOnboardingShowed(true)
+            }
     }
-
-}

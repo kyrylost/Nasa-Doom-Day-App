@@ -13,5 +13,5 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     implementation(project(":data:repository"))
-    implementation(project(":data:repository:database"))
+    implementation(project(":domain"))
 }

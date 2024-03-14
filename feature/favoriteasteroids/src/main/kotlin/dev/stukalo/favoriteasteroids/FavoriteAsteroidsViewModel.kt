@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.stukalo.common.model.AsteroidUi
-import dev.stukalo.database.repo.FavoriteAsteroidsRepository
+import dev.stukalo.domain.DeleteFromFavoriteUseCase
+import dev.stukalo.domain.GetFavoriteAsteroidsUseCase
 import dev.stukalo.favoriteasteroids.util.mapper.mapToAsteroidUi
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -17,7 +17,8 @@ import javax.inject.Inject
 class FavoriteAsteroidsViewModel
     @Inject
     constructor(
-        private val favoriteAsteroidsRepository: FavoriteAsteroidsRepository,
+        private val getFavoriteAsteroidsUseCase: GetFavoriteAsteroidsUseCase,
+        private val deleteFromFavoriteAsteroidsUseCase: DeleteFromFavoriteUseCase,
     ) : ViewModel() {
         private val _favoriteAsteroidsStateFlow = MutableStateFlow(FavoriteAsteroidsUiState())
         val favoriteAsteroidsStateFlow = _favoriteAsteroidsStateFlow.asStateFlow()
@@ -28,7 +29,7 @@ class FavoriteAsteroidsViewModel
 
         fun collectAsteroids() =
             viewModelScope.launch {
-                favoriteAsteroidsRepository.getFavoriteAsteroids().collect { listOfAsteroids ->
+                getFavoriteAsteroidsUseCase().collect { listOfAsteroids ->
                     if (listOfAsteroids != null) {
                         _favoriteAsteroidsStateFlow.update { state ->
                             state.copy(
@@ -46,9 +47,5 @@ class FavoriteAsteroidsViewModel
                 }
             }
 
-        fun deleteAsteroid(id: String) {
-            viewModelScope.launch(Dispatchers.IO) {
-                favoriteAsteroidsRepository.deleteAsteroid(id)
-            }
-        }
+        fun deleteAsteroid(id: String) = deleteFromFavoriteAsteroidsUseCase(id)
     }

@@ -86,4 +86,6 @@ dependencies {
     implementation(project(":data:datastore:impl"))
 
     implementation(project(":data:worker"))
+
+    implementation(project(":domain"))
 }

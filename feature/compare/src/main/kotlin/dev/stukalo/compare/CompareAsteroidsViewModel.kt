@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.stukalo.common.model.AsteroidUi
 import dev.stukalo.compare.mapper.mapToAsteroidUi
-import dev.stukalo.database.repo.FavoriteAsteroidsRepository
+import dev.stukalo.domain.GetFavoriteAsteroidsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class CompareAsteroidsViewModel
     @Inject
     constructor(
-        private val favoriteAsteroidsRepository: FavoriteAsteroidsRepository,
+        private val getFavoriteAsteroidsUseCase: GetFavoriteAsteroidsUseCase,
     ) : ViewModel() {
         private val _compareStateFlow = MutableStateFlow<List<AsteroidUi>>(emptyList())
         val compareStateFlow = _compareStateFlow.asStateFlow()
@@ -24,7 +24,7 @@ class CompareAsteroidsViewModel
         fun getFavoriteAsteroids() {
             viewModelScope.launch {
                 _compareStateFlow.emit(
-                    favoriteAsteroidsRepository.getFavoriteAsteroids().first()?.map {
+                    getFavoriteAsteroidsUseCase().first()?.map {
                         it.mapToAsteroidUi()
                     } ?: emptyList(),
                 )

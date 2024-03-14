@@ -7,6 +7,7 @@ import dev.stukalo.asteroiddetails.util.mapToAsteroidRepo
 import dev.stukalo.common.model.AsteroidUi
 import dev.stukalo.database.repo.FavoriteAsteroidsRepository
 import dev.stukalo.datastore.PreferencesManager
+import dev.stukalo.domain.DeleteFromFavoriteUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -21,6 +22,7 @@ class AsteroidDetailsViewModel
     constructor(
         private val favoriteAsteroidsRepository: FavoriteAsteroidsRepository,
         private val datastore: PreferencesManager,
+        private val deleteFromFavoriteUseCase: DeleteFromFavoriteUseCase,
     ) : ViewModel() {
         private val _addStatusSharedFlow = MutableSharedFlow<String?>()
         val addStatusSharedFlow = _addStatusSharedFlow.asSharedFlow()
@@ -41,6 +43,8 @@ class AsteroidDetailsViewModel
                 }
             }
         }
+
+        fun deleteAsteroidFromFavorite(id: String) = deleteFromFavoriteUseCase(id)
 
         suspend fun isAsteroidInFavorite(id: String?): Boolean =
             withContext(Dispatchers.IO) {

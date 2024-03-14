@@ -11,7 +11,6 @@ import dev.stukalo.onboard.viewpager.OnboardingPagerAdapter
 import dev.stukalo.platform.BaseFragment
 
 class FragmentOnboarding : BaseFragment(R.layout.fragment_onboarding) {
-
     private val viewBinding: FragmentOnboardingBinding by viewBinding(FragmentOnboardingBinding::bind)
     private val viewModel: OnboardingViewModel by activityViewModels()
 
@@ -21,7 +20,7 @@ class FragmentOnboarding : BaseFragment(R.layout.fragment_onboarding) {
         val asteroidsPagerAdapter = OnboardingPagerAdapter()
 
         with(viewBinding) {
-            vpOnboarding.apply{
+            vpOnboarding.apply {
                 adapter = asteroidsPagerAdapter
                 setPageTransformer { page, position ->
                     setParallaxTransformation(page, position)
@@ -47,7 +46,6 @@ class FragmentOnboarding : BaseFragment(R.layout.fragment_onboarding) {
             }
 
             setOnPageChangeCallback()
-
         }
     }
 
@@ -78,7 +76,10 @@ class FragmentOnboarding : BaseFragment(R.layout.fragment_onboarding) {
         }
     }
 
-    private fun setParallaxTransformation(page: View, position: Float) {
+    private fun setParallaxTransformation(
+        page: View,
+        position: Float,
+    ) {
         page.apply {
             val parallaxView = this.findViewById<View>(R.id.onboardingImage)
             when {

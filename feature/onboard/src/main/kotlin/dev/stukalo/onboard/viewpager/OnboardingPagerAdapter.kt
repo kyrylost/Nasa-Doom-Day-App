@@ -12,28 +12,31 @@ class OnboardingPagerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         parent: ViewGroup,
         viewType: Int,
     ): RecyclerView.ViewHolder {
-        return when(viewType) {
-            0 -> OnboardingFirstScreenViewHolder(
-                ViewOnboardingFirstBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false,
+        return when (viewType) {
+            0 ->
+                OnboardingFirstScreenViewHolder(
+                    ViewOnboardingFirstBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false,
+                    ),
                 )
-            )
-            1 -> OnboardingSecondScreenViewHolder(
-                ViewOnboardingSecondBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false,
+            1 ->
+                OnboardingSecondScreenViewHolder(
+                    ViewOnboardingSecondBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false,
+                    ),
                 )
-            )
-            2 -> OnboardingThirdScreenViewHolder(
-                ViewOnboardingThirdBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false,
+            2 ->
+                OnboardingThirdScreenViewHolder(
+                    ViewOnboardingThirdBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false,
+                    ),
                 )
-            )
 
             else -> {
                 OnboardingThirdScreenViewHolder(
@@ -41,7 +44,7 @@ class OnboardingPagerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         LayoutInflater.from(parent.context),
                         parent,
                         false,
-                    )
+                    ),
                 )
             }
         }

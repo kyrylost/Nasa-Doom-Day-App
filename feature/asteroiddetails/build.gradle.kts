@@ -18,4 +18,5 @@ dependencies {
     implementation(project(":data:repository"))
     implementation(project(":data:repository:database"))
     implementation(project(":data:datastore"))
+    implementation(project(":domain"))
 }

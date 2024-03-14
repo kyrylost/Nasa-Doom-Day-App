@@ -13,13 +13,12 @@ import dev.stukalo.platform.BaseFragment
 import kotlinx.coroutines.launch
 
 class FragmentInit : BaseFragment(R.layout.fragment_init) {
-
     private val viewModel: InitViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         parent: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         collectFlow()
         return super.onCreateView(inflater, parent, savedInstanceState)
