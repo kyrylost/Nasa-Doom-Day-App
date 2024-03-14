@@ -13,4 +13,9 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     implementation(project(":data:repository:database"))
+
+    androidTestImplementation(libs.junit)
+    implementation(libs.junit.ktx)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
 }

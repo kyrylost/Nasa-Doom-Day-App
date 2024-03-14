@@ -47,5 +47,5 @@ class FavoriteAsteroidsViewModel
                 }
             }
 
-        fun deleteAsteroid(id: String) = deleteFromFavoriteAsteroidsUseCase(id)
+        fun deleteAsteroid(id: String?) = deleteFromFavoriteAsteroidsUseCase(id)
     }

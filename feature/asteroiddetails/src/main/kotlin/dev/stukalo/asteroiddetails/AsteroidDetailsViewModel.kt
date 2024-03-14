@@ -44,7 +44,7 @@ class AsteroidDetailsViewModel
             }
         }
 
-        fun deleteAsteroidFromFavorite(id: String) = deleteFromFavoriteUseCase(id)
+        fun deleteAsteroidFromFavorite(id: String?) = deleteFromFavoriteUseCase(id)
 
         suspend fun isAsteroidInFavorite(id: String?): Boolean =
             withContext(Dispatchers.IO) {

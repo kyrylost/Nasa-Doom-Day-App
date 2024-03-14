@@ -11,9 +11,11 @@ class DeleteFromFavoriteUseCase
     constructor(
         private val favoriteAsteroidsRepository: FavoriteAsteroidsRepository,
     ) {
-        operator fun invoke(id: String) {
+        operator fun invoke(id: String?) {
             CoroutineScope(Dispatchers.IO).launch {
-                favoriteAsteroidsRepository.deleteAsteroid(id)
+                id?.let {
+                    favoriteAsteroidsRepository.deleteAsteroid(id)
+                }
             }
         }
     }

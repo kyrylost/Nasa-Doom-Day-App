@@ -29,8 +29,9 @@ coroutines = "1.6.4"
 viewbindingpropertydelegate-version = "1.5.9"
 
 junit = "4.13.2"
-androidx-test-ext-junit = "1.1.5"
-espresso-core = "3.5.1"
+junit-ktx = "1.1.5"
+mockito-kotlin = "5.2.1"
+kotlinx-coroutines-test = "1.7.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -81,8 +82,9 @@ opengl-egloo = { group = "com.otaliastudios.opengl", name = "egloo", version.ref
 kotlinx-coroutines = { group="org.jetbrains.kotlinx", name="kotlinx-coroutines-core", version.ref = "coroutines" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junit-ktx" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito-kotlin" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }

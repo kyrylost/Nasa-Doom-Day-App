@@ -357,11 +357,13 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
             ibFavorite.setOnClickListener {
                 lifecycleScope.launch {
                     with(viewModel) {
-                        if (viewModel.isAsteroidInFavorite(asteroidUi.id)) {
-                            onDeleteFromFavorite(asteroidUi)
-                        } else {
-                            addToFavorite(asteroidUi)
-                            enableCompareButton(asteroidUi.id)
+                        asteroidUi.apply {
+                            if (viewModel.isAsteroidInFavorite(id)) {
+                                onDeleteFromFavorite(id)
+                            } else {
+                                addToFavorite(this)
+                                enableCompareButton(id)
+                            }
                         }
                     }
                 }
@@ -386,10 +388,8 @@ class FragmentAsteroidDetails : BaseFragment(R.layout.fragment_asteroid_details)
         }
     }
 
-    private fun onDeleteFromFavorite(asteroidUi: AsteroidUi) {
-        asteroidUi.id?.let {
-            viewModel.deleteAsteroidFromFavorite(it)
-        }
+    private fun onDeleteFromFavorite(id: String?) {
+        viewModel.deleteAsteroidFromFavorite(id)
         viewBinding.ibFavorite.colorFilter = null
         disableCompareButton()
     }

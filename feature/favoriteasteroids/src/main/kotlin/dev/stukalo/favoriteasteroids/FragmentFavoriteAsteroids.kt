@@ -32,9 +32,7 @@ class FragmentFavoriteAsteroids : BaseFragment(R.layout.fragment_favorite_astero
             layoutManager = LinearLayoutManager(requireContext())
         }
         favoriteAsteroidsItemAdapter.onDeleteItemClick = {
-            it.id?.let { id ->
-                viewModel.deleteAsteroid(id)
-            }
+            viewModel.deleteAsteroid(it.id)
         }
         favoriteAsteroidsItemAdapter.onItemClick = {
             navigateTo(NavigationDirection.AsteroidDetails, arg = AsteroidAdapter.toJson(it))
